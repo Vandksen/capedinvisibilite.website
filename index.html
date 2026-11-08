@@ -82,6 +82,7 @@ h3 { font-size: 23px; font-weight: 500; letter-spacing: -.015em; line-height: 1.
   text-transform: uppercase;
 }
 .eyebrow { color: var(--blue); }
+.section-title { display: flex; flex-direction: column; gap: 22px; }
 .lead { color: var(--ink); }
 .small { font-size: 15px; color: var(--muted); }
 
@@ -99,8 +100,11 @@ h3 { font-size: 23px; font-weight: 500; letter-spacing: -.015em; line-height: 1.
   cursor: pointer;
 }
 .btn:hover { background: #0D2BB5; border-color: #0D2BB5; }
+.btn-icon { flex: none; margin-right: 8px; image-rendering: pixelated; }
 .btn.ghost { background: transparent; color: var(--blue); border-color: rgba(17, 54, 219, .35); }
 .btn.ghost:hover { background: rgba(17, 54, 219, .08); border-color: var(--blue); }
+
+.header-cta { min-height: 38px; padding: 0 16px; font-size: 14px; }
 
 /* En-tête */
 .site-header {
@@ -126,6 +130,17 @@ h3 { font-size: 23px; font-weight: 500; letter-spacing: -.015em; line-height: 1.
   text-decoration: none;
 }
 .logo span { font-family: var(--serif); font-style: italic; font-weight: 400; letter-spacing: .01em; }
+.beta {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 2px 6px 3px;
+  border-radius: 9999px;
+  background: var(--blue);
+  color: var(--on-blue);
+  font: 500 10px/1 var(--mono);
+  letter-spacing: .06em;
+  vertical-align: 3px;
+}
 .site-nav { display: flex; flex-wrap: wrap; gap: 6px 24px; }
 .site-nav a {
   padding: 6px 0;
@@ -140,8 +155,11 @@ h3 { font-size: 23px; font-weight: 500; letter-spacing: -.015em; line-height: 1.
 @media (max-width: 760px) {
   html { scroll-padding-top: 104px; }
   .site-header .wrap { padding-block: 10px; gap: 4px; }
+  .logo { font-size: 15px; }
+  .beta { margin-left: 3px; padding: 2px 4px; font-size: 9px; vertical-align: 2px; }
   .site-nav { order: 3; flex-wrap: nowrap; width: 100%; overflow-x: auto; scrollbar-width: none; }
-  .header-cta { min-height: 40px; padding: 0 14px; font-size: 14px; }
+  .header-cta { min-height: 36px; padding: 0 10px; font-size: 13px; }
+  .header-cta .btn-icon { width: 16px; height: 16px; margin-right: 4px; }
   .site-nav::-webkit-scrollbar { display: none; }
   .site-nav a { flex: none; }
 }
@@ -305,7 +323,7 @@ details[open] summary span { transform: rotate(45deg); }
 
 /* Contact */
 .contact-text { display: flex; flex-direction: column; align-items: flex-start; gap: 22px; }
-.contact-text p { max-width: 520px; color: var(--on-blue-muted); font-size: 19px; }
+.contact-text p:not(.eyebrow) { max-width: 520px; color: var(--on-blue-muted); font-size: 19px; }
 .btn.light { background: var(--on-blue); border-color: var(--on-blue); color: var(--blue); }
 .btn.light:hover { background: #FFFFFF; border-color: #FFFFFF; }
 
@@ -335,7 +353,7 @@ details[open] summary span { transform: rotate(45deg); }
 <!-- En-tête -->
 <header class="site-header">
 <div class="wrap">
-<a class="logo" href="#accueil">CAPE D'<span>INVISIBILITÉ</span></a>
+<a class="logo" href="#accueil">CAPE D'<span>INVISIBILITÉ</span><sup class="beta">BÊTA</sup></a>
 <nav class="site-nav" aria-label="Navigation principale">
 <a href="#probleme">Le problème</a>
 <a href="#solution">La solution</a>
@@ -344,7 +362,7 @@ details[open] summary span { transform: rotate(45deg); }
 <a href="#faq">FAQ</a>
 <a href="#contact">Contact</a>
 </nav>
-<a class="btn header-cta" href="installation.html">Revêtir la cape →</a>
+<a class="btn header-cta" href="installation.html"><img class="btn-icon" src="assets/cape.png" alt="" width="24" height="24">Revêtir la cape →</a>
 </div>
 </header>
 
@@ -356,7 +374,7 @@ details[open] summary span { transform: rotate(45deg); }
 <h1>Utilisez l'IA<br>sans exposer<br><em>vos données.</em></h1>
 <p class="lead">Cape d'invisibilité pseudonymise vos fichiers Word, Excel et FEC, directement sur votre poste, avant de les confier à l'IA.</p>
 <div class="actions">
-<a class="btn" href="installation.html">Revêtir la cape →</a>
+<a class="btn" href="installation.html"><img class="btn-icon" src="assets/cape.png" alt="" width="24" height="24">Revêtir la cape →</a>
 <a class="btn ghost" href="#fonctionnement">Voir comment ça marche</a>
 </div>
 </div>
@@ -407,6 +425,7 @@ details[open] summary span { transform: rotate(45deg); }
 <div class="wrap split">
 <div class="solution-side">
 <div class="solution-intro">
+<p class="eyebrow">La solution</p>
 <h2>L'IA sans<br>les <em>risques</em></h2>
 <p>Cape d'invisibilité remplace les noms, numéros et coordonnées par des pseudonymes cohérents, sans toucher aux montants, aux dates ni aux comptes. L'IA travaille sur un fichier exploitable ; vous gardez seul la clé pour retrouver les vraies valeurs. Le meilleur des deux mondes : la protection des données et la puissance de l'IA.</p>
 </div>
@@ -424,7 +443,10 @@ details[open] summary span { transform: rotate(45deg); }
 <section id="fonctionnement" class="section blue">
 <div class="wrap how">
 <div class="how-head">
+<div class="section-title">
+<p class="eyebrow">Fonctionnement</p>
 <h2>Comment <em>ça marche</em></h2>
+</div>
 <p class="small">Trois étapes, sans compétence technique, avec l'IA de votre choix.</p>
 </div>
 <div class="cards">
@@ -450,7 +472,10 @@ details[open] summary span { transform: rotate(45deg); }
 <!-- Formats -->
 <section class="section">
 <div class="wrap stack">
+<div class="section-title">
+<p class="eyebrow">Formats</p>
 <h2>Vos formats, <em>intacts</em></h2>
+</div>
 <div class="cards">
 <div class="panel format">
 <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8z"></path><path d="M14 3v5h5"></path><path d="M8 13h8"></path><path d="M8 17h6"></path></svg>
@@ -488,7 +513,10 @@ details[open] summary span { transform: rotate(45deg); }
 <!-- Pour qui -->
 <section class="section">
 <div class="wrap stack">
+<div class="section-title">
+<p class="eyebrow">Utilisateurs</p>
 <h2>Pour <em>qui</em></h2>
+</div>
 <div class="audience">
 <div><h3>Cabinets d'expertise comptable</h3><p class="small">Gagner du temps sur les FEC sans entamer le secret professionnel.</p></div>
 <div><h3>Directeurs financiers</h3><p class="small">Analyser balances et reportings avec l'IA sans exposer l'entreprise.</p></div>
@@ -522,7 +550,10 @@ details[open] summary span { transform: rotate(45deg); }
 <!-- FAQ -->
 <section id="faq" class="section" style="padding-top: 0">
 <div class="wrap split">
+<div class="section-title">
+<p class="eyebrow">FAQ</p>
 <h2>Questions <em>fréquentes</em></h2>
+</div>
 <div class="panel faq-list">
 <details open>
 <summary>Mes données quittent-elles mon poste ?<span aria-hidden="true">+</span></summary>
@@ -542,7 +573,7 @@ details[open] summary span { transform: rotate(45deg); }
 </details>
 <details>
 <summary>Quand sera-t-elle disponible ?<span aria-hidden="true">+</span></summary>
-<p class="small">[DATE DE DISPONIBILITÉ À COMPLÉTER]</p>
+<p class="small">En bêta.</p>
 </details>
 </div>
 </div>
@@ -551,6 +582,7 @@ details[open] summary span { transform: rotate(45deg); }
 <!-- Contact -->
 <section id="contact" class="section blue">
 <div class="wrap contact-text">
+<p class="eyebrow">Contact</p>
 <h2>Protégez vos données. <em>Gardez l'IA.</em></h2>
 <p>Pour contacter le porteur du projet, rendez-vous sur Structurre.fr.</p>
 <a class="btn light" href="https://structurre.fr">Aller sur Structurre.fr</a>
@@ -560,7 +592,7 @@ details[open] summary span { transform: rotate(45deg); }
 <!-- Pied de page -->
 <footer class="site-footer">
 <div class="wrap">
-<span class="logo">CAPE D'<span>INVISIBILITÉ</span></span>
+<span class="logo">CAPE D'<span>INVISIBILITÉ</span><sup class="beta">BÊTA</sup></span>
 <nav class="legal" aria-label="Liens légaux">
 <a href="#mentions">Mentions légales</a>
 <a href="#confidentialite">Politique de confidentialité</a>

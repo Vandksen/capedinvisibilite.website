@@ -4,7 +4,540 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Installation — Cape d'invisibilité</title>
-<meta name="robots" content="noindex">
+<meta name="description" content="Installez Cape d'invisibilité sur votre PC ou votre Mac, puis pseudonymisez vos fichiers, étape par étape.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&amp;family=Instrument+Serif:ital@1&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap">
+<style>
+:root {
+  --cream: #F4EFE3;
+  --paper: #FCF9F1;
+  --blue: #1136DB;
+  --ink: #1B2450;
+  --muted: #565D78;
+  --line: #E0DACA;
+  --chip: #EBE6D9;
+  --on-blue: #F8F3E6;
+  --on-blue-muted: #DCE1FA;
+  --line-blue: rgba(248, 243, 230, .24);
+  --sans: 'Inter Tight', system-ui, sans-serif;
+  --serif: 'Instrument Serif', Georgia, serif;
+  --mono: 'JetBrains Mono', ui-monospace, Menlo, Consolas, monospace;
+  --section: clamp(72px, 10vw, 128px);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: var(--blue); }
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, summary:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+h1, h2, h3, p, ol, ul, figure { margin: 0; }
+ol, ul { list-style: none; padding: 0; }
+
+h1, h2 {
+  color: var(--blue);
+  font-weight: 500;
+  letter-spacing: -.035em;
+  line-height: 1.02;
+}
+h1 { font-size: clamp(46px, 6vw, 76px); }
+h2 { font-size: clamp(38px, 4.6vw, 60px); }
+h1 em, h2 em {
+  font-family: var(--serif);
+  font-size: 1.08em;
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -.015em;
+}
+h3 { font-size: 23px; font-weight: 500; letter-spacing: -.015em; line-height: 1.2; }
+
+.wrap { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.section { padding-block: var(--section); }
+.split {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+  gap: clamp(40px, 6vw, 88px);
+}
+
+.eyebrow, .label, .mono {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.eyebrow { color: var(--blue); }
+.section-title { display: flex; flex-direction: column; gap: 22px; }
+.lead { color: var(--ink); }
+.small { font-size: 15px; color: var(--muted); }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  min-height: 46px;
+  padding: 0 22px;
+  border: 1px solid var(--blue);
+  border-radius: 9999px;
+  background: var(--blue);
+  color: var(--on-blue);
+  font: 500 15px/1 var(--sans);
+  text-decoration: none;
+  cursor: pointer;
+}
+.btn:hover { background: #0D2BB5; border-color: #0D2BB5; }
+.btn-icon { flex: none; margin-right: 8px; image-rendering: pixelated; }
+.btn.ghost { background: transparent; color: var(--blue); border-color: rgba(17, 54, 219, .35); }
+.btn.ghost:hover { background: rgba(17, 54, 219, .08); border-color: var(--blue); }
+
+.header-cta { min-height: 38px; padding: 0 16px; font-size: 14px; }
+
+/* En-tête */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 1px solid var(--line);
+  background: var(--cream);
+}
+.site-header .wrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px 28px;
+  padding-block: 16px;
+}
+.logo {
+  color: var(--blue);
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-decoration: none;
+}
+.logo span { font-family: var(--serif); font-style: italic; font-weight: 400; letter-spacing: .01em; }
+.beta {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 2px 6px 3px;
+  border-radius: 9999px;
+  background: var(--blue);
+  color: var(--on-blue);
+  font: 500 10px/1 var(--mono);
+  letter-spacing: .06em;
+  vertical-align: 3px;
+}
+.site-nav { display: flex; flex-wrap: wrap; gap: 6px 24px; }
+.site-nav a {
+  padding: 6px 0;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: .04em;
+  text-decoration: none;
+}
+.site-nav a:hover { color: var(--blue); }
+
+@media (max-width: 760px) {
+  html { scroll-padding-top: 104px; }
+  .site-header .wrap { padding-block: 10px; gap: 4px; }
+  .logo { font-size: 15px; }
+  .beta { margin-left: 3px; padding: 2px 4px; font-size: 9px; vertical-align: 2px; }
+  .site-nav { order: 3; flex-wrap: nowrap; width: 100%; overflow-x: auto; scrollbar-width: none; }
+  .header-cta { min-height: 36px; padding: 0 10px; font-size: 13px; }
+  .header-cta .btn-icon { width: 16px; height: 16px; margin-right: 4px; }
+  .site-nav::-webkit-scrollbar { display: none; }
+  .site-nav a { flex: none; }
+}
+
+/* Composants */
+
+.panel {
+  border: 1px solid rgba(255, 255, 255, .8);
+  border-radius: 24px;
+  background: var(--paper);
+  box-shadow: 0 30px 60px -30px rgba(17, 54, 219, .32), 0 2px 10px rgba(27, 36, 80, .06);
+}
+
+.pill {
+  display: inline-flex;
+  padding: 5px 12px;
+  border-radius: 9999px;
+  background: var(--chip);
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+
+.pill.on { background: var(--blue); color: var(--on-blue); }
+.note { color: var(--muted); font-family: var(--mono); font-size: 12px; }
+.row {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 13px 0;
+  border-top: 1px solid var(--line);
+  font-size: 16px;
+  line-height: 1.45;
+}
+
+/* Pied de page */
+.site-footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 20px 24px; padding-block: 36px; }
+.legal { display: flex; flex-wrap: wrap; gap: 8px 24px; font-family: var(--mono); font-size: 12px; color: var(--muted); }
+.legal a { color: var(--ink); }
+
+/* Page d'installation */
+:root { --rail: 304px; }
+.guide { max-width: 1200px; margin: 0 auto; padding: 0 24px 0 calc(24px + var(--rail)); }
+.guide-hero { display: flex; flex-direction: column; align-items: flex-start; gap: 24px; padding-block: clamp(56px, 8vw, 96px) 24px; }
+.guide-hero .lead { max-width: 620px; font-size: 19px; }
+
+/* Menu fixe, centré verticalement */
+.steps-nav {
+  position: fixed;
+  z-index: 50;
+  top: 50%;
+  left: max(24px, calc((100vw - 1200px) / 2 + 24px));
+  width: 256px;
+  padding: 10px;
+  transform: translateY(-50%);
+  border: 1px solid rgba(255, 255, 255, .8);
+  border-radius: 20px;
+  background: var(--paper);
+  box-shadow: 0 30px 60px -30px rgba(17, 54, 219, .32), 0 2px 10px rgba(27, 36, 80, .06);
+}
+.steps-nav ol { display: flex; flex-direction: column; gap: 2px; }
+.steps-nav a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 44px;
+  padding: 6px 10px;
+  border-radius: 12px;
+  color: var(--ink);
+  font-size: 15px;
+  line-height: 1.2;
+  text-decoration: none;
+}
+.steps-nav a:hover { background: rgba(17, 54, 219, .08); color: var(--blue); }
+.steps-nav .n {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 9999px;
+  background: var(--chip);
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 12px;
+}
+.steps-nav a[aria-current="step"] { background: var(--blue); color: var(--on-blue); }
+.steps-nav a[aria-current="step"] .n { background: var(--on-blue); color: var(--blue); }
+
+/* Étapes */
+.step { display: flex; flex-direction: column; gap: 24px; padding-block: clamp(44px, 6vw, 72px); border-top: 1px solid var(--line); scroll-margin-top: 72px; }
+.step:first-of-type { border-top: 0; }
+.step-head { display: grid; grid-template-columns: clamp(64px, 8vw, 96px) minmax(0, 1fr); gap: 8px; align-items: start; }
+.step-num { color: var(--blue); font-size: clamp(52px, 6vw, 76px); font-weight: 500; letter-spacing: -.05em; line-height: .95; }
+.step-title { display: flex; flex-direction: column; gap: 10px; }
+.step h2 { font-size: clamp(30px, 3.4vw, 42px); }
+.step-why { color: var(--muted); }
+.os { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 16px; }
+.card { display: flex; flex-direction: column; gap: 14px; padding: 24px; }
+.card ol { display: flex; flex-direction: column; gap: 10px; padding-left: 22px; list-style: decimal; }
+.card ol li::marker { color: var(--blue); font-family: var(--mono); font-size: 14px; }
+.card ul { display: flex; flex-direction: column; gap: 10px; padding-left: 20px; list-style: disc; }
+.card ul li::marker { color: var(--blue); }
+.pill { align-self: flex-start; }
+code {
+  padding: 1px 6px;
+  border-radius: 6px;
+  background: var(--chip);
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: .86em;
+  overflow-wrap: anywhere;
+}
+.callout { display: flex; flex-direction: column; gap: 6px; padding: 18px 22px; border-radius: 16px; }
+.callout .label { color: inherit; }
+.callout.see { background: var(--blue); color: var(--on-blue); }
+.callout.see code { background: rgba(248, 243, 230, .18); color: var(--on-blue); }
+.callout.warn { border: 1px solid var(--blue); color: var(--ink); }
+.callout.warn .label { color: var(--blue); }
+.guide-end { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; padding-block: clamp(44px, 6vw, 72px) var(--section); border-top: 1px solid var(--line); }
+.guide-end h2 { font-size: clamp(30px, 3.4vw, 42px); }
+.site-footer .wrap { padding-left: calc(24px + var(--rail)); }
+
+@media (max-width: 1040px) {
+  :root { --rail: 44px; }
+  .steps-nav { left: 8px; width: 44px; padding: 3px; border-radius: 9999px; }
+  .steps-nav a { justify-content: center; width: 36px; min-height: 36px; padding: 0; border-radius: 9999px; }
+  .steps-nav .label-text { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .steps-nav .n { background: transparent; }
+  .steps-nav a[aria-current="step"] .n { background: transparent; color: var(--on-blue); }
+  .guide { padding-right: 16px; padding-left: 64px; }
+  .site-footer .wrap { padding-left: 64px; }
+  .card { padding: 20px; }
+}
+</style>
 </head>
-<body></body>
+<body>
+
+<header class="site-header">
+<div class="wrap">
+<a class="logo" href="index.html#accueil">CAPE D'<span>INVISIBILITÉ</span><sup class="beta">BÊTA</sup></a>
+<nav class="site-nav" aria-label="Navigation principale">
+<a href="index.html#probleme">Le problème</a>
+<a href="index.html#solution">La solution</a>
+<a href="index.html#fonctionnement">Fonctionnement</a>
+<a href="index.html#securite">Sécurité</a>
+<a href="index.html#faq">FAQ</a>
+<a href="index.html#contact">Contact</a>
+</nav>
+<a class="btn header-cta" href="installation.html" aria-current="page"><img class="btn-icon" src="assets/cape.png" alt="" width="24" height="24">Revêtir la cape →</a>
+</div>
+</header>
+
+<nav class="steps-nav" aria-label="Étapes de l'installation">
+<ol>
+<li><a href="#etape-1"><span class="n">1</span><span class="label-text">Installer Python</span></a></li>
+<li><a href="#etape-2"><span class="n">2</span><span class="label-text">Récupérer l'application</span></a></li>
+<li><a href="#etape-3"><span class="n">3</span><span class="label-text">Installer l'application</span></a></li>
+<li><a href="#etape-4"><span class="n">4</span><span class="label-text">Lancer l'application</span></a></li>
+<li><a href="#etape-5"><span class="n">5</span><span class="label-text">Pseudonymiser un fichier</span></a></li>
+<li><a href="#etape-6"><span class="n">6</span><span class="label-text">Utiliser l'IA</span></a></li>
+<li><a href="#etape-7"><span class="n">7</span><span class="label-text">Rétablir les vraies valeurs</span></a></li>
+</ol>
+</nav>
+
+<main class="guide">
+
+<div class="guide-hero">
+<p class="eyebrow">Installation · En bêta</p>
+<h1>Revêtez la cape<br><em>en sept étapes.</em></h1>
+<p class="lead">Aucune compétence technique n'est nécessaire. Suivez les étapes dans l'ordre : les trois premières ne se font qu'une seule fois.</p>
+</div>
+
+<section class="step" id="etape-1">
+<div class="step-head">
+<span class="step-num" aria-hidden="true">1</span>
+<div class="step-title">
+<p class="eyebrow">Une seule fois</p>
+<h2>Installer <em>Python</em></h2>
+<p class="step-why">Python est le programme gratuit qui fait fonctionner l'application. Il faut la version 3.11 ou plus récente.</p>
+</div>
+</div>
+<div class="os">
+<div class="panel card">
+<span class="pill on">Sur PC</span>
+<ol>
+<li>Ouvrez <a href="https://www.python.org/downloads/">python.org/downloads</a>.</li>
+<li>Cliquez sur le bouton jaune de téléchargement.</li>
+<li>Ouvrez le fichier téléchargé, puis cliquez sur <strong>Install Now</strong>.</li>
+</ol>
+</div>
+<div class="panel card">
+<span class="pill on">Sur Mac</span>
+<ol>
+<li>Ouvrez <a href="https://www.python.org/downloads/macos/">python.org/downloads/macos</a>.</li>
+<li>Téléchargez la dernière version stable, au format <code>.pkg</code>.</li>
+<li>Ouvrez le fichier téléchargé et suivez l'assistant jusqu'au bout.</li>
+</ol>
+</div>
+</div>
+<div class="callout see"><span class="label mono">Vous devez voir</span><span>Un message confirmant que l'installation de Python a réussi.</span></div>
+</section>
+
+<section class="step" id="etape-2">
+<div class="step-head">
+<span class="step-num" aria-hidden="true">2</span>
+<div class="step-title">
+<p class="eyebrow">Une seule fois</p>
+<h2>Récupérer <em>l'application</em></h2>
+<p class="step-why">L'application tient dans un dossier que vous gardez sur votre ordinateur.</p>
+</div>
+</div>
+<div class="panel card">
+<ol>
+<li>Téléchargez le dossier de l'application. Le lien sera indiqué ici à l'ouverture de la bêta.</li>
+<li>Décompressez-le si besoin.</li>
+<li>Placez-le à son emplacement définitif, par exemple dans <code>Documents</code>.</li>
+</ol>
+</div>
+<div class="callout warn"><span class="label mono">Attention</span><span>Ne déplacez plus ce dossier après l'étape 3. Sinon, l'application ne se lancera plus et il faudra refaire l'installation.</span></div>
+</section>
+
+<section class="step" id="etape-3">
+<div class="step-head">
+<span class="step-num" aria-hidden="true">3</span>
+<div class="step-title">
+<p class="eyebrow">Une seule fois</p>
+<h2>Installer <em>l'application</em></h2>
+<p class="step-why">Cette étape télécharge les composants nécessaires. C'est la seule qui utilise Internet, et aucun de vos fichiers n'est concerné.</p>
+</div>
+</div>
+<div class="os">
+<div class="panel card">
+<span class="pill on">Sur PC</span>
+<ol>
+<li>Dans le dossier, double-cliquez sur <code>installer.bat</code>.</li>
+<li>Si Windows affiche un avertissement bleu, cliquez sur <strong>Informations complémentaires</strong>, puis <strong>Exécuter quand même</strong>.</li>
+<li>Attendez sans fermer la fenêtre.</li>
+</ol>
+</div>
+<div class="panel card">
+<span class="pill on">Sur Mac</span>
+<ol>
+<li>Dans le dossier, double-cliquez sur <code>installer.command</code>.</li>
+<li>Si le Mac refuse de l'ouvrir, faites un clic droit sur le fichier, puis <strong>Ouvrir</strong>.</li>
+<li>Attendez sans fermer la fenêtre.</li>
+</ol>
+</div>
+</div>
+<div class="callout see"><span class="label mono">Vous devez voir</span><span>Le message « Installation terminée ». Vous pouvez alors fermer la fenêtre.</span></div>
+</section>
+
+<section class="step" id="etape-4">
+<div class="step-head">
+<span class="step-num" aria-hidden="true">4</span>
+<div class="step-title">
+<p class="eyebrow">À chaque utilisation</p>
+<h2>Lancer <em>l'application</em></h2>
+<p class="step-why">L'application s'ouvre dans votre navigateur, mais elle fonctionne entièrement sur votre poste.</p>
+</div>
+</div>
+<div class="os">
+<div class="panel card">
+<span class="pill on">Sur PC</span>
+<ol>
+<li>Double-cliquez sur <code>Lancer Invisibility Cloak.bat</code>.</li>
+<li>Laissez ouverte la fenêtre qui apparaît.</li>
+</ol>
+</div>
+<div class="panel card">
+<span class="pill on">Sur Mac</span>
+<ol>
+<li>Double-cliquez sur <code>Lancer Invisibility Cloak.command</code>.</li>
+<li>Laissez ouverte la fenêtre qui apparaît.</li>
+</ol>
+</div>
+</div>
+<div class="callout see"><span class="label mono">Vous devez voir</span><span>Votre navigateur s'ouvre sur l'adresse <code>http://127.0.0.1:5055</code>, avec les parties « Pseudonymiser » et « Rétablir les vraies valeurs ».</span></div>
+<div class="callout warn"><span class="label mono">Pour arrêter</span><span>Fermez la fenêtre laissée ouverte. Pour réutiliser l'application, reprenez à cette étape.</span></div>
+</section>
+
+<section class="step" id="etape-5">
+<div class="step-head">
+<span class="step-num" aria-hidden="true">5</span>
+<div class="step-title">
+<p class="eyebrow">À chaque fichier</p>
+<h2>Pseudonymiser <em>un fichier</em></h2>
+<p class="step-why">L'application remplace les noms et les numéros par des codes, sans toucher aux montants ni aux dates.</p>
+</div>
+</div>
+<div class="panel card">
+<ol>
+<li>Dans la partie « Pseudonymiser », choisissez un mot de passe.</li>
+<li>Déposez votre fichier dans la zone prévue : Word (<code>.docx</code>), Excel (<code>.xlsx</code>) ou FEC (<code>.txt</code>).</li>
+<li>Récupérez l'archive ZIP téléchargée par le navigateur, puis décompressez-la.</li>
+</ol>
+</div>
+<div class="callout see"><span class="label mono">Vous devez voir</span><span>Deux fichiers : votre fichier pseudonymisé et sa table de correspondance, qui se termine par <code>.map</code>.</span></div>
+<div class="callout warn"><span class="label mono">Attention</span><span>Notez votre mot de passe en lieu sûr. Sans lui, la table est illisible et personne ne peut la récupérer.</span></div>
+</section>
+
+<section class="step" id="etape-6">
+<div class="step-head">
+<span class="step-num" aria-hidden="true">6</span>
+<div class="step-title">
+<p class="eyebrow">À chaque fichier</p>
+<h2>Utiliser <em>l'IA</em></h2>
+<p class="step-why">L'IA travaille sur le fichier pseudonymisé : elle ne voit ni les noms, ni les numéros d'origine.</p>
+</div>
+</div>
+<div class="panel card">
+<ol>
+<li>Ouvrez le fichier pseudonymisé et relisez-le : c'est vous qui validez ce qui part.</li>
+<li>Envoyez ce seul fichier à l'IA de votre choix.</li>
+<li>Enregistrez la réponse de l'IA dans un fichier : <code>.docx</code>, <code>.xlsx</code>, <code>.txt</code>, <code>.csv</code> ou <code>.md</code>.</li>
+</ol>
+</div>
+<div class="callout warn"><span class="label mono">Attention</span><span>N'envoyez jamais la table <code>.map</code> à l'IA, et gardez-la sur votre poste.</span></div>
+</section>
+
+<section class="step" id="etape-7">
+<div class="step-head">
+<span class="step-num" aria-hidden="true">7</span>
+<div class="step-title">
+<p class="eyebrow">À chaque fichier</p>
+<h2>Rétablir <em>les vraies valeurs</em></h2>
+<p class="step-why">L'application remet les noms et les numéros d'origine à la place des codes.</p>
+</div>
+</div>
+<div class="panel card">
+<ol>
+<li>Dans la partie « Rétablir les vraies valeurs », déposez le fichier à rétablir.</li>
+<li>Déposez la table de correspondance <code>.map</code>.</li>
+<li>Saisissez votre mot de passe, puis cliquez sur <strong>Rétablir et télécharger</strong>.</li>
+</ol>
+</div>
+<div class="callout see"><span class="label mono">Vous devez voir</span><span>Votre navigateur télécharge le fichier avec les vraies valeurs.</span></div>
+</section>
+
+<div class="guide-end">
+<p class="eyebrow">Besoin d'aide ?</p>
+<h2>Une question <em>sur l'installation ?</em></h2>
+<a class="btn" href="https://structurre.fr">Aller sur Structurre.fr</a>
+</div>
+
+</main>
+
+<footer class="site-footer">
+<div class="wrap">
+<span class="logo">CAPE D'<span>INVISIBILITÉ</span><sup class="beta">BÊTA</sup></span>
+<nav class="legal" aria-label="Liens légaux">
+<a href="#mentions">Mentions légales</a>
+<a href="#confidentialite">Politique de confidentialité</a>
+<span>Un projet <a href="https://structurre.fr">Structurre.fr</a></span>
+</nav>
+</div>
+</footer>
+
+<script>
+// Met en évidence, dans le menu, l'étape en cours de lecture.
+(() => {
+  const links = [...document.querySelectorAll(".steps-nav a")];
+  const steps = links.map((link) => document.querySelector(link.getAttribute("href")));
+  function update() {
+    const line = window.innerHeight * 0.4;
+    let current = 0;
+    steps.forEach((step, index) => { if (step.getBoundingClientRect().top <= line) current = index; });
+    links.forEach((link, index) => {
+      if (index === current) link.setAttribute("aria-current", "step");
+      else link.removeAttribute("aria-current");
+    });
+  }
+  window.addEventListener("scroll", update, { passive: true });
+  window.addEventListener("resize", update);
+  update();
+})();
+</script>
+</body>
 </html>
