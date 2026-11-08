@@ -3,8 +3,571 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cape d'invisibilité</title>
-<meta name="robots" content="noindex">
+<title>Cape d'invisibilité — Utilisez l'IA sans exposer vos données</title>
+<meta name="description" content="Cape d'invisibilité pseudonymise vos fichiers Word, Excel et FEC, directement sur votre poste, avant de les confier à l'IA.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&amp;family=Instrument+Serif:ital@1&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap">
+<style>
+:root {
+  --cream: #F4EFE3;
+  --paper: #FCF9F1;
+  --blue: #1136DB;
+  --ink: #1B2450;
+  --muted: #565D78;
+  --line: #E0DACA;
+  --chip: #EBE6D9;
+  --on-blue: #F8F3E6;
+  --on-blue-muted: #DCE1FA;
+  --line-blue: rgba(248, 243, 230, .24);
+  --sans: 'Inter Tight', system-ui, sans-serif;
+  --serif: 'Instrument Serif', Georgia, serif;
+  --mono: 'JetBrains Mono', ui-monospace, Menlo, Consolas, monospace;
+  --section: clamp(72px, 10vw, 128px);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: var(--blue); }
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, summary:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+h1, h2, h3, p, ol, ul, figure { margin: 0; }
+ol, ul { list-style: none; padding: 0; }
+
+h1, h2 {
+  color: var(--blue);
+  font-weight: 500;
+  letter-spacing: -.035em;
+  line-height: 1.02;
+}
+h1 { font-size: clamp(46px, 6vw, 76px); }
+h2 { font-size: clamp(38px, 4.6vw, 60px); }
+h1 em, h2 em {
+  font-family: var(--serif);
+  font-size: 1.08em;
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -.015em;
+}
+h3 { font-size: 23px; font-weight: 500; letter-spacing: -.015em; line-height: 1.2; }
+
+.wrap { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.section { padding-block: var(--section); }
+.split {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+  gap: clamp(40px, 6vw, 88px);
+}
+
+.eyebrow, .label, .mono {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.eyebrow { color: var(--blue); }
+.lead { color: var(--ink); }
+.small { font-size: 15px; color: var(--muted); }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  min-height: 46px;
+  padding: 0 22px;
+  border: 1px solid var(--blue);
+  border-radius: 9999px;
+  background: var(--blue);
+  color: var(--on-blue);
+  font: 500 15px/1 var(--sans);
+  text-decoration: none;
+  cursor: pointer;
+}
+.btn:hover { background: #0D2BB5; border-color: #0D2BB5; }
+.btn.ghost { background: transparent; color: var(--blue); border-color: rgba(17, 54, 219, .35); }
+.btn.ghost:hover { background: rgba(17, 54, 219, .08); border-color: var(--blue); }
+
+/* En-tête */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 1px solid var(--line);
+  background: var(--cream);
+}
+.site-header .wrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px 28px;
+  padding-block: 16px;
+}
+.logo {
+  color: var(--blue);
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-decoration: none;
+}
+.logo span { font-family: var(--serif); font-style: italic; font-weight: 400; letter-spacing: .01em; }
+.site-nav { display: flex; flex-wrap: wrap; gap: 6px 24px; }
+.site-nav a {
+  padding: 6px 0;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: .04em;
+  text-decoration: none;
+}
+.site-nav a:hover { color: var(--blue); }
+
+@media (max-width: 760px) {
+  html { scroll-padding-top: 104px; }
+  .site-header .wrap { padding-block: 10px; gap: 4px; }
+  .site-nav { order: 3; flex-wrap: nowrap; width: 100%; overflow-x: auto; scrollbar-width: none; }
+  .header-cta { min-height: 40px; padding: 0 14px; font-size: 14px; }
+  .site-nav::-webkit-scrollbar { display: none; }
+  .site-nav a { flex: none; }
+}
+
+/* Accroche */
+.hero { align-items: center; }
+.hero-text { display: flex; flex-direction: column; align-items: flex-start; gap: 28px; }
+.hero-text .lead { max-width: 480px; font-size: 19px; }
+.actions { display: flex; flex-wrap: wrap; gap: 12px; }
+
+/* Panneaux */
+.panel {
+  border: 1px solid rgba(255, 255, 255, .8);
+  border-radius: 24px;
+  background: var(--paper);
+  box-shadow: 0 30px 60px -30px rgba(17, 54, 219, .32), 0 2px 10px rgba(27, 36, 80, .06);
+}
+.compare { min-width: 0; overflow: hidden; }
+.compare-block { padding: 22px 26px 12px; }
+.compare-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 16px;
+  margin-bottom: 8px;
+}
+.pill {
+  display: inline-flex;
+  padding: 5px 12px;
+  border-radius: 9999px;
+  background: var(--chip);
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+.pill.on { background: var(--blue); color: var(--on-blue); }
+.note { color: var(--muted); font-family: var(--mono); font-size: 12px; }
+.row {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 13px 0;
+  border-top: 1px solid var(--line);
+  font-size: 16px;
+  line-height: 1.45;
+}
+.row > span:first-child { min-width: 0; overflow-wrap: anywhere; }
+.amount { flex: none; color: var(--muted); font-family: var(--mono); font-size: 14px; }
+.hl {
+  padding: 1px 4px;
+  border-bottom: 1.5px solid var(--blue);
+  border-radius: 4px;
+  background: rgba(17, 54, 219, .1);
+  color: var(--blue);
+  font-family: var(--mono);
+  font-size: .9em;
+}
+.compare-step {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 26px;
+  border-block: 1px solid var(--line);
+  background: var(--cream);
+  color: var(--ink);
+  font-size: 14px;
+  line-height: 1.4;
+}
+.compare-step svg { flex: none; color: var(--blue); }
+.compare figcaption { padding: 2px 26px 20px; color: var(--muted); font-family: var(--mono); font-size: 12px; }
+
+/* Le problème */
+.problem-text { display: flex; flex-direction: column; gap: 20px; }
+.problem-title { display: flex; flex-direction: column; gap: 22px; }
+
+/* La solution */
+.solution-side { display: flex; flex-direction: column; gap: 36px; }
+.solution-intro { display: flex; flex-direction: column; gap: 22px; max-width: 480px; }
+.steps li {
+  display: grid;
+  grid-template-columns: clamp(72px, 8vw, 104px) minmax(0, 1fr);
+  gap: 8px;
+  padding: 30px 0;
+  border-bottom: 1px solid var(--line);
+}
+.steps li:first-child { border-top: 1px solid var(--line); }
+.steps .num { color: var(--blue); font-size: clamp(44px, 5vw, 64px); font-weight: 500; letter-spacing: -.05em; line-height: 1; }
+.steps div { display: flex; flex-direction: column; gap: 10px; }
+.steps h3 { color: var(--blue); }
+
+/* Sections bleues */
+.blue { background: var(--blue); color: var(--on-blue); }
+.blue h2 { color: var(--on-blue); }
+.blue .small { color: var(--on-blue-muted); }
+.blue .panel .small { color: var(--muted); }
+.blue .eyebrow { color: var(--on-blue-muted); }
+
+/* Comment ça marche */
+.how { display: flex; flex-direction: column; gap: 56px; }
+.how-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 24px; }
+.how-head p { max-width: 380px; }
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 290px), 1fr)); gap: 20px; }
+.how-card { display: flex; flex-direction: column; gap: 14px; padding: 28px; color: var(--ink); }
+.how-card .big { color: var(--blue); font-size: 76px; font-weight: 500; letter-spacing: -.05em; line-height: 1; }
+.how-card h3 { color: var(--blue); }
+
+/* Formats */
+.stack { display: flex; flex-direction: column; gap: 48px; }
+.format { display: flex; flex-direction: column; gap: 36px; min-height: 260px; padding: 30px; }
+.format svg { color: var(--blue); }
+.format div { display: flex; flex-direction: column; gap: 10px; }
+.format h3 { display: flex; align-items: center; gap: 10px; color: var(--blue); }
+.ext { padding: 3px 9px; border-radius: 9999px; background: var(--chip); color: var(--ink); font-family: var(--mono); font-size: 12px; font-weight: 400; letter-spacing: 0; }
+
+/* Sécurité */
+.security-intro { display: flex; flex-direction: column; gap: 22px; }
+.checks li {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 6px 24px;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--line-blue);
+}
+.checks li:first-child { border-top: 1px solid var(--line-blue); }
+.checks .title { font-size: 21px; font-weight: 500; letter-spacing: -.01em; }
+.checks .detail { color: var(--on-blue-muted); font-family: var(--mono); font-size: 13px; }
+
+/* Pour qui */
+.audience { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); column-gap: 32px; }
+.audience div { display: flex; flex-direction: column; gap: 10px; padding: 26px 0; border-top: 1px solid var(--line); }
+.audience h3 { color: var(--blue); }
+
+/* Licence */
+.license { padding: clamp(28px, 6vw, 72px); border-radius: 24px; }
+
+/* FAQ */
+.faq-list { padding: 8px 30px; }
+.faq-list details { padding: 22px 0; border-bottom: 1px solid var(--line); }
+.faq-list details:last-child { border-bottom: 0; }
+summary {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  color: var(--blue);
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: -.01em;
+  line-height: 1.3;
+  list-style: none;
+  cursor: pointer;
+}
+summary::-webkit-details-marker { display: none; }
+summary span { flex: none; font-family: var(--mono); font-weight: 400; transition: transform .15s; }
+details[open] summary span { transform: rotate(45deg); }
+.faq-list p { margin-top: 12px; }
+
+/* Contact */
+.contact-text { display: flex; flex-direction: column; align-items: flex-start; gap: 22px; }
+.contact-text p { max-width: 520px; color: var(--on-blue-muted); font-size: 19px; }
+.btn.light { background: var(--on-blue); border-color: var(--on-blue); color: var(--blue); }
+.btn.light:hover { background: #FFFFFF; border-color: #FFFFFF; }
+
+#contact {
+  display: flex;
+  align-items: center;
+  min-height: clamp(560px, 54vw, 860px);
+  background: var(--blue) url("assets/fond-contact.jpg") center / cover no-repeat;
+}
+#contact .wrap { width: 100%; }
+#contact h2 { max-width: 620px; }
+@media (max-width: 760px) {
+  #contact {
+    background-image: linear-gradient(rgba(10, 26, 120, .45), rgba(10, 26, 120, .45)), url("assets/fond-contact.jpg");
+    background-position: 30% center;
+  }
+}
+
+/* Pied de page */
+.site-footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 20px 24px; padding-block: 36px; }
+.legal { display: flex; flex-wrap: wrap; gap: 8px 24px; font-family: var(--mono); font-size: 12px; color: var(--muted); }
+.legal a { color: var(--ink); }
+</style>
 </head>
-<body></body>
+<body>
+
+<!-- En-tête -->
+<header class="site-header">
+<div class="wrap">
+<a class="logo" href="#accueil">CAPE D'<span>INVISIBILITÉ</span></a>
+<nav class="site-nav" aria-label="Navigation principale">
+<a href="#probleme">Le problème</a>
+<a href="#solution">La solution</a>
+<a href="#fonctionnement">Fonctionnement</a>
+<a href="#securite">Sécurité</a>
+<a href="#faq">FAQ</a>
+<a href="#contact">Contact</a>
+</nav>
+<a class="btn header-cta" href="#contact">Revêtir la cape →</a>
+</div>
+</header>
+
+<!-- Accroche -->
+<section id="accueil" class="section">
+<div class="wrap split hero">
+<div class="hero-text">
+<p class="eyebrow">Pseudonymisation 100 % locale · Gratuit, licence MIT</p>
+<h1>Utilisez l'IA<br>sans exposer<br><em>vos données.</em></h1>
+<p class="lead">Cape d'invisibilité pseudonymise vos fichiers Word, Excel et FEC, directement sur votre poste, avant de les confier à l'IA.</p>
+<div class="actions">
+<a class="btn" href="#contact">Demander une démo</a>
+<a class="btn ghost" href="#fonctionnement">Voir comment ça marche</a>
+</div>
+</div>
+<figure class="panel compare">
+<div class="compare-block">
+<div class="compare-head">
+<span class="pill">Avant — votre FEC</span>
+<span class="note">sur votre poste</span>
+</div>
+<div class="row"><span>Facture Zorbalix SARL — FA2026001234</span><span class="amount">1 200,00</span></div>
+<div class="row"><span>Virement M. Quentrel — 06 12 34 56 78</span><span class="amount">450,00</span></div>
+<div class="row"><span>Honoraires Cabinet Brevandier</span><span class="amount">3 600,00</span></div>
+</div>
+<div class="compare-step">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14"></path><path d="M6 13l6 6 6-6"></path></svg>
+<span>Pseudonymisé localement · montants et comptes conservés</span>
+</div>
+<div class="compare-block">
+<div class="compare-head">
+<span class="pill on">Après — envoyé à l'IA</span>
+<span class="note">aucun nom, aucun numéro</span>
+</div>
+<div class="row"><span>Facture <span class="hl">41c47f3</span> SARL — <span class="hl">3e81cc81181005195</span></span><span class="amount">1 200,00</span></div>
+<div class="row"><span>Virement M. <span class="hl">9f47f90</span> — <span class="hl">76 34 60 79 83</span></span><span class="amount">450,00</span></div>
+<div class="row"><span>Honoraires <span class="hl">30d0a11</span> <span class="hl">357d226</span></span><span class="amount">3 600,00</span></div>
+</div>
+<figcaption>Exemple fictif.</figcaption>
+</figure>
+</div>
+</section>
+
+<!-- Le problème -->
+<section id="probleme" class="section" style="padding-top: 0">
+<div class="wrap split">
+<div class="problem-title">
+<p class="eyebrow">Le problème</p>
+<h2>L'IA fait gagner du temps. <em>Vos fichiers, eux, parlent trop.</em></h2>
+</div>
+<div class="problem-text">
+<p>Un FEC, une balance, un reporting : chaque fichier contient des noms de clients et de fournisseurs, des numéros de facture, des IBAN, des coordonnées.</p>
+<p>Les envoyer tels quels à une IA, c'est exposer vos clients au risque RGPD et votre cabinet au regard du secret professionnel.</p>
+</div>
+</div>
+</section>
+
+<!-- La solution -->
+<section id="solution" class="section" style="padding-top: 0">
+<div class="wrap split">
+<div class="solution-side">
+<div class="solution-intro">
+<h2>L'IA sans<br>les <em>risques</em></h2>
+<p>Cape d'invisibilité remplace les noms, numéros et coordonnées par des pseudonymes cohérents, sans toucher aux montants, aux dates ni aux comptes. L'IA travaille sur un fichier exploitable ; vous gardez seul la clé pour retrouver les vraies valeurs. Le meilleur des deux mondes : la protection des données et la puissance de l'IA.</p>
+</div>
+</div>
+<ol class="steps">
+<li><span class="num">01</span><div><h3>Traitement 100 % local</h3><p class="small">Le fichier ne quitte jamais votre poste. Aucun serveur, aucune API, aucune télémétrie.</p></div></li>
+<li><span class="num">02</span><div><h3>Pseudonymes cohérents</h3><p class="small">Un même tiers garde le même pseudonyme dans tout le fichier : l'IA peut rapprocher, totaliser et analyser.</p></div></li>
+<li><span class="num">03</span><div><h3>Table de correspondance chiffrée</h3><p class="small">Valeurs d'origine et pseudonymes sont conservés chez vous, chiffrés, protégés par votre mot de passe.</p></div></li>
+<li><span class="num">04</span><div><h3>Relecture avant envoi</h3><p class="small">Un écran de contrôle montre tout ce qui a été masqué. Vous validez avant d'exporter.</p></div></li>
+</ol>
+</div>
+</section>
+
+<!-- Comment ça marche -->
+<section id="fonctionnement" class="section blue">
+<div class="wrap how">
+<div class="how-head">
+<h2>Comment <em>ça marche</em></h2>
+<p class="small">Trois étapes, sans compétence technique, avec l'IA de votre choix.</p>
+</div>
+<div class="cards">
+<div class="panel how-card">
+<span class="big">1</span>
+<h3>Déposez votre fichier</h3>
+<p class="small">Word, Excel ou FEC, glissé dans l'application.</p>
+</div>
+<div class="panel how-card">
+<span class="big">2</span>
+<h3>Récupérez la version pseudonymisée</h3>
+<p class="small">Même format, même mise en forme, et la table de correspondance, sur votre poste.</p>
+</div>
+<div class="panel how-card">
+<span class="big">3</span>
+<h3>Utilisez l'IA, puis réinjectez</h3>
+<p class="small">Collez la réponse de l'IA : les vraies valeurs reviennent à leur place.</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Formats -->
+<section class="section">
+<div class="wrap stack">
+<h2>Vos formats, <em>intacts</em></h2>
+<div class="cards">
+<div class="panel format">
+<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8z"></path><path d="M14 3v5h5"></path><path d="M8 13h8"></path><path d="M8 17h6"></path></svg>
+<div><h3>Word <span class="ext">.docx</span></h3><p class="small">Lettres de mission, rapports, notes : la mise en forme est conservée.</p></div>
+</div>
+<div class="panel format">
+<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="1"></rect><path d="M4 10h16"></path><path d="M4 15h16"></path><path d="M10 4v16"></path></svg>
+<div><h3>Excel <span class="ext">.xlsx</span></h3><p class="small">Balances, reportings, tableaux de bord : cellules et formules restent en place.</p></div>
+</div>
+<div class="panel format">
+<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16"></path><path d="M4 10h16"></path><path d="M4 14h16"></path><path d="M4 18h10"></path></svg>
+<div><h3>FEC <span class="ext">.txt</span></h3><p class="small">Encodage, séparateur et structure respectés ; comptes, dates et montants conservés.</p></div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Sécurité -->
+<section id="securite" class="section blue">
+<div class="wrap split">
+<div class="security-intro">
+<p class="eyebrow">Sécurité</p>
+<h2>Rien ne sort.<br><em>Jamais.</em></h2>
+<p class="small">Juridiquement, il s'agit de pseudonymisation (RGPD, art. 4.5) : la table de correspondance reste sous votre seul contrôle.</p>
+</div>
+<ul class="checks">
+<li><span class="title">Aucune donnée transmise</span><span class="detail">traitement sur le poste</span></li>
+<li><span class="title">Aucune télémétrie</span><span class="detail">ni API, ni analytics</span></li>
+<li><span class="title">Table chiffrée chez vous</span><span class="detail">AES, mot de passe</span></li>
+<li><span class="title">Fichiers temporaires supprimés</span><span class="detail">après traitement</span></li>
+</ul>
+</div>
+</section>
+
+<!-- Pour qui -->
+<section class="section">
+<div class="wrap stack">
+<h2>Pour <em>qui</em></h2>
+<div class="audience">
+<div><h3>Cabinets d'expertise comptable</h3><p class="small">Gagner du temps sur les FEC sans entamer le secret professionnel.</p></div>
+<div><h3>Directeurs financiers</h3><p class="small">Analyser balances et reportings avec l'IA sans exposer l'entreprise.</p></div>
+<div><h3>Avocats</h3><p class="small">Préparer des documents avec l'IA en protégeant l'identité des clients.</p></div>
+<div><h3>Entreprises sensibles</h3><p class="small">Toute équipe qui manipule des données personnelles ou confidentielles.</p></div>
+</div>
+</div>
+</section>
+
+<!-- Licence -->
+<section id="licence" class="section" style="padding-top: 0">
+<div class="wrap">
+<div class="license blue split">
+<div class="security-intro">
+<p class="eyebrow">Licence MIT</p>
+<h2>Gratuit,<br><em>et libre.</em></h2>
+<p class="small">Cape d'invisibilité est distribuée sous licence MIT, l'une des licences libres les plus permissives. Aucun abonnement, aucune clé d'activation.</p>
+<p class="small">Résumé : seul le texte de la licence fait foi.</p>
+</div>
+<ul class="checks">
+<li><span class="title">Utilisez</span><span class="detail">gratuitement, y compris en entreprise</span></li>
+<li><span class="title">Modifiez</span><span class="detail">adaptez le code à vos besoins</span></li>
+<li><span class="title">Redistribuez</span><span class="detail">partagez-le ou intégrez-le à vos produits</span></li>
+<li><span class="title">Conservez la mention</span><span class="detail">copyright et licence dans chaque copie</span></li>
+<li><span class="title">Sans garantie</span><span class="detail">logiciel fourni « en l'état »</span></li>
+</ul>
+</div>
+</div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="section" style="padding-top: 0">
+<div class="wrap split">
+<h2>Questions <em>fréquentes</em></h2>
+<div class="panel faq-list">
+<details open>
+<summary>Mes données quittent-elles mon poste ?<span aria-hidden="true">+</span></summary>
+<p class="small">Non. Tout le traitement a lieu sur votre ordinateur ; l'application ne fait aucun appel réseau.</p>
+</details>
+<details>
+<summary>Avec quelle IA fonctionne-t-elle ?<span aria-hidden="true">+</span></summary>
+<p class="small">Toutes : le fichier pseudonymisé s'utilise avec l'assistant de votre choix.</p>
+</details>
+<details>
+<summary>Puis-je retrouver les vraies données ?<span aria-hidden="true">+</span></summary>
+<p class="small">Oui, grâce à la table de correspondance chiffrée, qui réinjecte les valeurs d'origine dans la réponse de l'IA.</p>
+</details>
+<details>
+<summary>Est-ce payant ?<span aria-hidden="true">+</span></summary>
+<p class="small">Non. Cape d'invisibilité est gratuite, sous licence MIT.</p>
+</details>
+<details>
+<summary>Quand sera-t-elle disponible ?<span aria-hidden="true">+</span></summary>
+<p class="small">[DATE DE DISPONIBILITÉ À COMPLÉTER]</p>
+</details>
+</div>
+</div>
+</section>
+
+<!-- Contact -->
+<section id="contact" class="section blue">
+<div class="wrap contact-text">
+<h2>Protégez vos données. <em>Gardez l'IA.</em></h2>
+<p>Pour demander une démo ou contacter le porteur du projet, rendez-vous sur Structurre.fr.</p>
+<a class="btn light" href="https://structurre.fr">Aller sur Structurre.fr</a>
+</div>
+</section>
+
+<!-- Pied de page -->
+<footer class="site-footer">
+<div class="wrap">
+<span class="logo">CAPE D'<span>INVISIBILITÉ</span></span>
+<nav class="legal" aria-label="Liens légaux">
+<a href="#mentions">Mentions légales</a>
+<a href="#confidentialite">Politique de confidentialité</a>
+<span>Un projet <a href="https://structurre.fr">Structurre.fr</a></span>
+</nav>
+</div>
+</footer>
+
+</body>
 </html>
