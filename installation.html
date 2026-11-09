@@ -189,7 +189,7 @@ h3 { font-size: 23px; font-weight: 500; letter-spacing: -.015em; line-height: 1.
 
 .panel {
   border: 1px solid rgba(255, 255, 255, .8);
-  border-radius: 24px;
+  border-radius: 10px;
   background: var(--paper);
   box-shadow: 0 30px 60px -30px rgba(17, 54, 219, .32), 0 2px 10px rgba(27, 36, 80, .06);
 }
@@ -239,18 +239,20 @@ h3 { font-size: 23px; font-weight: 500; letter-spacing: -.015em; line-height: 1.
   padding: 10px;
   transform: translateY(-50%);
   border: 1px solid rgba(255, 255, 255, .8);
-  border-radius: 20px;
+  border-radius: 10px;
   background: var(--paper);
   box-shadow: 0 30px 60px -30px rgba(17, 54, 219, .32), 0 2px 10px rgba(27, 36, 80, .06);
 }
 .steps-nav ol { display: flex; flex-direction: column; gap: 2px; }
+.steps-group + .steps-group { margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--line); }
+.steps-cat { margin: 0; padding: 4px 10px 6px; color: var(--blue); font-family: var(--mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; }
 .steps-nav a {
   display: flex;
   align-items: center;
   gap: 12px;
   min-height: 44px;
   padding: 6px 10px;
-  border-radius: 12px;
+  border-radius: 10px;
   color: var(--ink);
   font-size: 15px;
   line-height: 1.2;
@@ -289,17 +291,6 @@ h3 { font-size: 23px; font-weight: 500; letter-spacing: -.015em; line-height: 1.
 .pill { align-self: flex-start; }
 .card .btn { align-self: flex-start; }
 .card .small { margin-top: -8px; }
-.label-text { display: flex; flex-direction: column; align-items: flex-start; gap: 3px; }
-.tag {
-  padding: 1px 6px;
-  border-radius: 9999px;
-  background: var(--chip);
-  color: var(--ink);
-  font-family: var(--mono);
-  font-size: 10px;
-  line-height: 1.4;
-}
-.steps-nav a[aria-current="step"] .tag { background: rgba(248, 243, 230, .2); color: var(--on-blue); }
 code {
   padding: 1px 6px;
   border-radius: 6px;
@@ -309,7 +300,10 @@ code {
   font-size: .86em;
   overflow-wrap: anywhere;
 }
-.callout { display: flex; flex-direction: column; gap: 6px; padding: 18px 22px; border-radius: 16px; }
+.unlock { display: flex; flex-direction: column; gap: 12px; padding: 18px 20px; border-radius: 10px; background: rgba(17, 54, 219, .1); }
+.unlock .label { color: var(--blue); font-weight: 500; }
+.unlock code { background: rgba(255, 255, 255, .7); }
+.callout { display: flex; flex-direction: column; gap: 6px; padding: 18px 22px; border-radius: 10px; }
 .callout .label { color: inherit; }
 .callout.see { background: var(--blue); color: var(--on-blue); }
 .callout.see code { background: rgba(248, 243, 230, .18); color: var(--on-blue); }
@@ -323,6 +317,8 @@ code {
   :root { --rail: 44px; }
   .steps-nav { left: 8px; width: 44px; padding: 3px; border-radius: 9999px; }
   .steps-nav a { justify-content: center; width: 36px; min-height: 36px; padding: 0; border-radius: 9999px; }
+  .steps-cat { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .steps-group + .steps-group { margin-top: 3px; padding-top: 3px; }
   .steps-nav .label-text { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
   .steps-nav .n { background: transparent; }
   .steps-nav a[aria-current="step"] .n { background: transparent; color: var(--on-blue); }
@@ -350,15 +346,28 @@ code {
 </header>
 
 <nav class="steps-nav" aria-label="Étapes de l'installation">
+<div class="steps-group">
+<p class="steps-cat">Installation</p>
 <ol>
-<li><a href="#etape-1"><span class="n">1</span><span class="label-text">Installer Python<span class="tag">Installation</span></span></a></li>
-<li><a href="#etape-2"><span class="n">2</span><span class="label-text">Récupérer l'application<span class="tag">Installation</span></span></a></li>
-<li><a href="#etape-3"><span class="n">3</span><span class="label-text">Installer l'application<span class="tag">Installation</span></span></a></li>
+<li><a href="#etape-1"><span class="n">1</span><span class="label-text">Installer Python</span></a></li>
+<li><a href="#etape-2"><span class="n">2</span><span class="label-text">Récupérer l'application</span></a></li>
+<li><a href="#etape-3"><span class="n">3</span><span class="label-text">Installer l'application</span></a></li>
+</ol>
+</div>
+<div class="steps-group">
+<p class="steps-cat">Lancer l'application</p>
+<ol>
 <li><a href="#etape-4"><span class="n">4</span><span class="label-text">Lancer l'application</span></a></li>
+</ol>
+</div>
+<div class="steps-group">
+<p class="steps-cat">Utiliser l'application</p>
+<ol>
 <li><a href="#etape-5"><span class="n">5</span><span class="label-text">Pseudonymiser un fichier</span></a></li>
 <li><a href="#etape-6"><span class="n">6</span><span class="label-text">Utiliser l'IA</span></a></li>
 <li><a href="#etape-7"><span class="n">7</span><span class="label-text">Rétablir les vraies valeurs</span></a></li>
 </ol>
+</div>
 </nav>
 
 <main class="guide">
@@ -446,9 +455,16 @@ code {
 <span class="pill on">Sur PC</span>
 <ol>
 <li>Dans le dossier, double-cliquez sur <code>installer.bat</code>.</li>
+</ol>
+<div class="unlock">
+<span class="label mono">Si Windows bloque le fichier</span>
+<ol>
 <li>Si Windows affiche l'écran bleu « Windows a protégé votre ordinateur », ne cliquez pas sur <strong>Ne pas exécuter</strong>.</li>
 <li>Cliquez sur le lien <strong>Informations complémentaires</strong>, juste sous le texte.</li>
 <li>Vérifiez que l'application indiquée est bien <code>installer.bat</code>, puis cliquez sur <strong>Exécuter quand même</strong>.</li>
+</ol>
+</div>
+<ol start="2">
 <li>Attendez sans fermer la fenêtre.</li>
 </ol>
 </div>
@@ -456,10 +472,17 @@ code {
 <span class="pill on">Sur Mac</span>
 <ol>
 <li>Dans le dossier, double-cliquez sur <code>installer.command</code>.</li>
+</ol>
+<div class="unlock">
+<span class="label mono">Si le Mac bloque le fichier</span>
+<ol>
 <li>Si le Mac affiche « Élément non ouvert », cliquez sur <strong>Terminé</strong>, surtout pas sur <strong>Placer dans la corbeille</strong>.</li>
 <li>Ouvrez <strong>Réglages Système</strong>, puis <strong>Confidentialité et sécurité</strong>.</li>
 <li>Descendez jusqu'à la section <strong>Sécurité</strong>, puis cliquez sur <strong>Ouvrir quand même</strong> en face de <code>installer.command</code>.</li>
 <li>Confirmez avec votre mot de passe ou Touch ID.</li>
+</ol>
+</div>
+<ol start="2">
 <li>Attendez sans fermer la fenêtre.</li>
 </ol>
 </div>
@@ -481,7 +504,16 @@ code {
 <span class="pill on">Sur PC</span>
 <ol>
 <li>Double-cliquez sur <code>Lancer Cape d'invisibilite.bat</code>.</li>
-<li>À la première ouverture, autorisez le fichier comme à l'étape 3.</li>
+</ol>
+<div class="unlock">
+<span class="label mono">Si Windows bloque le fichier</span>
+<ol>
+<li>Si Windows affiche l'écran bleu « Windows a protégé votre ordinateur », ne cliquez pas sur <strong>Ne pas exécuter</strong>.</li>
+<li>Cliquez sur le lien <strong>Informations complémentaires</strong>, juste sous le texte.</li>
+<li>Vérifiez que l'application indiquée est bien <code>Lancer Cape d'invisibilite.bat</code>, puis cliquez sur <strong>Exécuter quand même</strong>.</li>
+</ol>
+</div>
+<ol start="2">
 <li>Laissez ouverte la fenêtre qui apparaît.</li>
 </ol>
 </div>
@@ -489,15 +521,22 @@ code {
 <span class="pill on">Sur Mac</span>
 <ol>
 <li>Double-cliquez sur <code>Lancer Cape d'invisibilite.command</code>.</li>
+</ol>
+<div class="unlock">
+<span class="label mono">Si le Mac bloque le fichier</span>
+<ol>
 <li>Si le Mac affiche « Élément non ouvert », cliquez sur <strong>Terminé</strong>, surtout pas sur <strong>Placer dans la corbeille</strong>.</li>
 <li>Ouvrez <strong>Réglages Système</strong>, puis <strong>Confidentialité et sécurité</strong>.</li>
 <li>Descendez jusqu'à la section <strong>Sécurité</strong>, puis cliquez sur <strong>Ouvrir quand même</strong> en face de <code>Lancer Cape d'invisibilite.command</code>.</li>
 <li>Confirmez avec votre mot de passe ou Touch ID.</li>
+</ol>
+</div>
+<ol start="2">
 <li>Laissez ouverte la fenêtre qui apparaît.</li>
 </ol>
 </div>
 </div>
-<div class="callout warn"><span class="label mono">Sur Mac</span><span>Ce blocage est normal : Apple ne reconnaît pas encore l'éditeur de ces fichiers. Il n'apparaît qu'à la première ouverture de chaque fichier.</span></div>
+<div class="callout warn"><span class="label mono">Sur PC et sur Mac</span><span>Ce blocage est normal : Windows et Apple ne reconnaissent pas encore l'éditeur de ces fichiers. Il n'apparaît en principe qu'à la première ouverture de chaque fichier.</span></div>
 <div class="callout see"><span class="label mono">Vous devez voir</span><span>Votre navigateur s'ouvre sur l'adresse <code>http://127.0.0.1:5055</code>, avec les parties « Pseudonymiser » et « Rétablir les vraies valeurs ».</span></div>
 <div class="callout warn"><span class="label mono">Pour arrêter</span><span>Fermez la fenêtre laissée ouverte. Pour réutiliser l'application, reprenez à cette étape.</span></div>
 </section>
