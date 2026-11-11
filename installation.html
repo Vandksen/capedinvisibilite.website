@@ -548,20 +548,21 @@ code {
 <div class="step-head">
 <span class="step-num" aria-hidden="true">5</span>
 <div class="step-title">
-<p class="eyebrow">À chaque fichier</p>
+<p class="eyebrow">À chaque utilisation</p>
 <h2>Pseudonymiser <em>vos fichiers</em></h2>
-<p class="step-why">L'application remplace les noms et les numéros par des codes, sans toucher aux montants ni aux dates.</p>
+<p class="step-why">L'application remplace les noms et les numéros par des codes, sans toucher aux montants ni aux dates. Avec une même table, une valeur reçoit le même code dans tous les fichiers, même ajoutés plus tard.</p>
 </div>
 </div>
 <div class="panel card">
 <ol>
-<li>Dans la partie « Pseudonymiser », choisissez un mot de passe si vous voulez chiffrer la table de correspondance. Sans mot de passe, elle est un classeur Excel en clair. Le bouton <strong>Afficher</strong> permet de vérifier votre saisie.</li>
-<li>Pour ajouter des fichiers à une table déjà créée, déposez-la d'abord dans la zone « Table existante » (avec son mot de passe si elle est chiffrée).</li>
-<li>Déposez un ou plusieurs fichiers dans la zone prévue : Word (<code>.docx</code>), Excel (<code>.xlsx</code>) ou FEC (<code>.txt</code>).</li>
-<li>Récupérez l'archive ZIP téléchargée par le navigateur, puis décompressez-la.</li>
+<li>Dans la partie « Pseudonymiser », choisissez un mot de passe si vous voulez chiffrer la table de correspondance. Sans mot de passe, elle est un classeur Excel en clair, que vous pouvez ouvrir pour contrôler ce qui a été masqué. Le bouton <strong>Afficher</strong> permet de vérifier votre saisie.</li>
+<li>Pour compléter une table déjà créée, déposez-la d'abord dans la zone « Table existante » (avec son mot de passe si elle est chiffrée). Sinon, laissez cette zone vide : une nouvelle table est créée.</li>
+<li>Déposez un ou plusieurs fichiers dans la zone prévue : Word (<code>.docx</code>), Excel (<code>.xlsx</code>) ou FEC (<code>.txt</code>). Vous pouvez mélanger les formats, et déposer les FEC de plusieurs sociétés ou de plusieurs exercices : chaque société reçoit son propre SIREN fictif.</li>
+<li>Récupérez l'archive ZIP téléchargée par le navigateur, puis décompressez-la. Pour plusieurs fichiers, elle s'appelle <code>cape-3f9_….zip</code>.</li>
 </ol>
 </div>
 <div class="callout see"><span class="label mono">Vous devez voir</span><span>Vos fichiers pseudonymisés et leur table de correspondance : <code>table-3f9_….xlsx</code> en clair, ou <code>table-3f9_….map</code> si vous avez choisi un mot de passe. <code>3f9</code> est la référence de la table : elle figure aussi dans le nom de chaque fichier pseudonymisé avec elle (<code>rapport.cloak-3f9_….docx</code>).</span></div>
+<div class="callout warn"><span class="label mono">Table complétée</span><span>Quand vous complétez une table, l'archive en contient une nouvelle version, avec la même référence : elle remplace l'ancienne et couvre tous les fichiers, anciens et nouveaux. Conservez-la à la place de la précédente.</span></div>
 <div class="callout warn"><span class="label mono">Attention</span><span>Sans mot de passe, toute personne qui obtient la table peut lire les vraies valeurs : gardez-la sur votre poste. Si vous choisissez un mot de passe, notez-le en lieu sûr : sans lui, la table est illisible et personne ne peut la récupérer.</span></div>
 </section>
 
@@ -569,7 +570,7 @@ code {
 <div class="step-head">
 <span class="step-num" aria-hidden="true">6</span>
 <div class="step-title">
-<p class="eyebrow">À chaque fichier</p>
+<p class="eyebrow">À chaque utilisation</p>
 <h2>Utiliser <em>l'IA</em></h2>
 <p class="step-why">L'IA travaille sur le fichier pseudonymisé : elle ne voit ni les noms, ni les numéros d'origine.</p>
 </div>
@@ -588,19 +589,20 @@ code {
 <div class="step-head">
 <span class="step-num" aria-hidden="true">7</span>
 <div class="step-title">
-<p class="eyebrow">À chaque fichier</p>
+<p class="eyebrow">À chaque utilisation</p>
 <h2>Rétablir <em>les vraies valeurs</em></h2>
-<p class="step-why">L'application remet les noms et les numéros d'origine à la place des codes.</p>
+<p class="step-why">L'application remet les noms et les numéros d'origine à la place des codes, dans un fichier pseudonymisé comme dans la réponse de l'IA.</p>
 </div>
 </div>
 <div class="panel card">
 <ol>
-<li>Dans la partie « Rétablir les vraies valeurs », déposez le fichier à rétablir.</li>
+<li>Dans la partie « Rétablir les vraies valeurs », déposez le fichier à rétablir : un fichier pseudonymisé ou la réponse de l'IA.</li>
 <li>Déposez la table de correspondance, <code>.xlsx</code> ou <code>.map</code> : celle dont la référence figure dans le nom du fichier.</li>
 <li>Saisissez le mot de passe si la table est chiffrée (<code>.map</code>), puis cliquez sur <strong>Rétablir et télécharger</strong>.</li>
 </ol>
 </div>
-<div class="callout see"><span class="label mono">Vous devez voir</span><span>Votre navigateur télécharge le fichier avec les vraies valeurs.</span></div>
+<div class="callout see"><span class="label mono">Vous devez voir</span><span>Votre navigateur télécharge le fichier avec les vraies valeurs. Un FEC que vous n'avez pas modifié retrouve son nom et son contenu d'origine, à l'identique.</span></div>
+<div class="callout warn"><span class="label mono">Mauvaise table</span><span>Si le nom du fichier porte la référence d'une autre table, l'application le refuse : déposez la table dont la référence correspond. Les tables <code>.map</code> créées avec la version 0.1.0 restent lisibles.</span></div>
 </section>
 
 <div class="guide-end">
