@@ -302,10 +302,9 @@ h3 { font-size: 23px; font-weight: 500; letter-spacing: -.015em; line-height: 1.
 .security-intro { display: flex; flex-direction: column; gap: 22px; }
 .checks li {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 6px 24px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
   padding: 24px 0;
   border-bottom: 1px solid var(--line-blue);
 }
@@ -320,7 +319,6 @@ h3 { font-size: 23px; font-weight: 500; letter-spacing: -.015em; line-height: 1.
 
 /* Licence */
 .license { padding: clamp(28px, 6vw, 72px); border-radius: 10px; }
-.license .checks li { flex-direction: column; align-items: flex-start; gap: 8px; }
 
 /* FAQ */
 .faq-list { padding: 8px 30px; }
