@@ -455,8 +455,8 @@ details[open] summary span { transform: rotate(45deg); }
 </div>
 <ol class="steps">
 <li><span class="num">01</span><div><h3>Traitement 100 % local</h3><p class="small">Le fichier ne quitte jamais votre poste. Aucun serveur, aucune API, aucune télémétrie.</p></div></li>
-<li><span class="num">02</span><div><h3>Pseudonymes cohérents</h3><p class="small">Un même tiers garde le même pseudonyme dans tout le fichier : l'IA peut rapprocher, totaliser et analyser.</p></div></li>
-<li><span class="num">03</span><div><h3>Table de correspondance chiffrée</h3><p class="small">Valeurs d'origine et pseudonymes sont conservés chez vous, chiffrés, et protégés si vous définissez un mot de passe.</p></div></li>
+<li><span class="num">02</span><div><h3>Pseudonymes cohérents</h3><p class="small">Un même tiers garde le même pseudonyme dans tout le fichier, et d'un fichier à l'autre avec la même table : l'IA peut rapprocher, totaliser et analyser.</p></div></li>
+<li><span class="num">03</span><div><h3>Table de correspondance chez vous</h3><p class="small">Valeurs d'origine et pseudonymes sont conservés sur votre poste : un classeur Excel lisible, ou chiffré si vous définissez un mot de passe.</p></div></li>
 <li><span class="num">04</span><div><h3>Relecture avant envoi</h3><p class="small">Le document pseudonymisé peut être consulté pour vérification avant envoi.</p></div></li>
 </ol>
 </div>
@@ -527,7 +527,7 @@ details[open] summary span { transform: rotate(45deg); }
 <ul class="checks">
 <li><span class="title">Aucune donnée transmise</span><span class="detail">traitement sur le poste</span></li>
 <li><span class="title">Aucune télémétrie</span><span class="detail">ni API, ni analytics</span></li>
-<li><span class="title">Table chiffrée chez vous</span><span class="detail">AES, mot de passe</span></li>
+<li><span class="title">Table chez vous</span><span class="detail">chiffrée (AES) avec un mot de passe</span></li>
 <li><span class="title">Fichiers temporaires supprimés</span><span class="detail">après traitement</span></li>
 </ul>
 </div>
@@ -588,7 +588,7 @@ details[open] summary span { transform: rotate(45deg); }
 </details>
 <details>
 <summary>Puis-je retrouver les vraies données ?<span aria-hidden="true">+</span></summary>
-<p class="small">Oui, grâce à la table de correspondance chiffrée, qui réinjecte les valeurs d'origine dans la réponse de l'IA.</p>
+<p class="small">Oui, grâce à la table de correspondance, qui reste sur votre poste et réinjecte les valeurs d'origine dans la réponse de l'IA.</p>
 </details>
 <details>
 <summary>Est-ce payant ?<span aria-hidden="true">+</span></summary>

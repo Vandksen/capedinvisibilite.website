@@ -350,7 +350,7 @@ code {
 
 <nav class="steps-nav" aria-label="Étapes de l'installation">
 <div class="steps-group">
-<p class="steps-cat">Installation <span class="steps-version">v0.1.0</span></p>
+<p class="steps-cat">Installation <span class="steps-version">v0.2.0</span></p>
 <ol>
 <li><a href="#etape-1"><span class="n">1</span><span class="label-text">Installer Python</span></a></li>
 <li><a href="#etape-2"><span class="n">2</span><span class="label-text">Récupérer l'application</span></a></li>
@@ -366,7 +366,7 @@ code {
 <div class="steps-group">
 <p class="steps-cat">Utiliser l'application</p>
 <ol>
-<li><a href="#etape-5"><span class="n">5</span><span class="label-text">Pseudonymiser un fichier</span></a></li>
+<li><a href="#etape-5"><span class="n">5</span><span class="label-text">Pseudonymiser vos fichiers</span></a></li>
 <li><a href="#etape-6"><span class="n">6</span><span class="label-text">Utiliser l'IA</span></a></li>
 <li><a href="#etape-7"><span class="n">7</span><span class="label-text">Rétablir les vraies valeurs</span></a></li>
 </ol>
@@ -423,7 +423,7 @@ code {
 <div class="os">
 <div class="panel card">
 <span class="pill on">Sur PC</span>
-<a class="btn" href="telechargements/cape-d-invisibilite-pc.zip" download>Télécharger pour PC<svg class="chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></a>
+<a class="btn" href="telechargements/cape-d-invisibilite-0.2.0-pc.zip" download>Télécharger pour PC<svg class="chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></a>
 <span class="small">Archive ZIP · 46 Ko</span>
 <ol>
 <li>Dans vos téléchargements, faites un clic droit sur l'archive, puis <strong>Extraire tout</strong>.</li>
@@ -432,7 +432,7 @@ code {
 </div>
 <div class="panel card">
 <span class="pill on">Sur Mac</span>
-<a class="btn" href="telechargements/cape-d-invisibilite-mac.zip" download>Télécharger pour Mac<svg class="chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></a>
+<a class="btn" href="telechargements/cape-d-invisibilite-0.2.0-mac.zip" download>Télécharger pour Mac<svg class="chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></a>
 <span class="small">Archive ZIP · 46 Ko</span>
 <ol>
 <li>Dans vos téléchargements, double-cliquez sur l'archive pour la décompresser.</li>
@@ -549,19 +549,20 @@ code {
 <span class="step-num" aria-hidden="true">5</span>
 <div class="step-title">
 <p class="eyebrow">À chaque fichier</p>
-<h2>Pseudonymiser <em>un fichier</em></h2>
+<h2>Pseudonymiser <em>vos fichiers</em></h2>
 <p class="step-why">L'application remplace les noms et les numéros par des codes, sans toucher aux montants ni aux dates.</p>
 </div>
 </div>
 <div class="panel card">
 <ol>
-<li>Dans la partie « Pseudonymiser », choisissez un mot de passe si vous voulez protéger la table de correspondance. Le bouton <strong>Afficher</strong> permet de vérifier votre saisie.</li>
-<li>Déposez votre fichier dans la zone prévue : Word (<code>.docx</code>), Excel (<code>.xlsx</code>) ou FEC (<code>.txt</code>).</li>
+<li>Dans la partie « Pseudonymiser », choisissez un mot de passe si vous voulez chiffrer la table de correspondance. Sans mot de passe, elle est un classeur Excel en clair. Le bouton <strong>Afficher</strong> permet de vérifier votre saisie.</li>
+<li>Pour ajouter des fichiers à une table déjà créée, déposez-la d'abord dans la zone « Table existante » (avec son mot de passe si elle est chiffrée).</li>
+<li>Déposez un ou plusieurs fichiers dans la zone prévue : Word (<code>.docx</code>), Excel (<code>.xlsx</code>) ou FEC (<code>.txt</code>).</li>
 <li>Récupérez l'archive ZIP téléchargée par le navigateur, puis décompressez-la.</li>
 </ol>
 </div>
-<div class="callout see"><span class="label mono">Vous devez voir</span><span>Deux fichiers : votre fichier pseudonymisé et sa table de correspondance, qui se termine par <code>.map</code>.</span></div>
-<div class="callout warn"><span class="label mono">Attention</span><span>Si vous choisissez un mot de passe, notez-le en lieu sûr : sans lui, la table est illisible et personne ne peut la récupérer. Sans mot de passe, toute personne qui obtient la table peut lire les vraies valeurs.</span></div>
+<div class="callout see"><span class="label mono">Vous devez voir</span><span>Vos fichiers pseudonymisés et leur table de correspondance : <code>table-3f9_….xlsx</code> en clair, ou <code>table-3f9_….map</code> si vous avez choisi un mot de passe. <code>3f9</code> est la référence de la table : elle figure aussi dans le nom de chaque fichier pseudonymisé avec elle (<code>rapport.cloak-3f9_….docx</code>).</span></div>
+<div class="callout warn"><span class="label mono">Attention</span><span>Sans mot de passe, toute personne qui obtient la table peut lire les vraies valeurs : gardez-la sur votre poste. Si vous choisissez un mot de passe, notez-le en lieu sûr : sans lui, la table est illisible et personne ne peut la récupérer.</span></div>
 </section>
 
 <section class="step" id="etape-6">
@@ -576,11 +577,11 @@ code {
 <div class="panel card">
 <ol>
 <li>Ouvrez le fichier pseudonymisé et relisez-le : c'est vous qui validez ce qui part.</li>
-<li>Envoyez ce seul fichier à l'IA de votre choix.</li>
+<li>Envoyez les fichiers pseudonymisés à l'IA de votre choix. Avec une même table, une même valeur porte le même code dans tous les fichiers : l'IA peut les combiner.</li>
 <li>Enregistrez la réponse de l'IA dans un fichier : <code>.docx</code>, <code>.xlsx</code>, <code>.txt</code>, <code>.csv</code> ou <code>.md</code>.</li>
 </ol>
 </div>
-<div class="callout warn"><span class="label mono">Attention</span><span>N'envoyez jamais la table <code>.map</code> à l'IA, et gardez-la sur votre poste.</span></div>
+<div class="callout warn"><span class="label mono">Attention</span><span>N'envoyez jamais la table (<code>.xlsx</code> ou <code>.map</code>) à l'IA, et gardez-la sur votre poste.</span></div>
 </section>
 
 <section class="step" id="etape-7">
@@ -595,8 +596,8 @@ code {
 <div class="panel card">
 <ol>
 <li>Dans la partie « Rétablir les vraies valeurs », déposez le fichier à rétablir.</li>
-<li>Déposez la table de correspondance <code>.map</code>.</li>
-<li>Saisissez votre mot de passe si vous en avez choisi un, puis cliquez sur <strong>Rétablir et télécharger</strong>.</li>
+<li>Déposez la table de correspondance, <code>.xlsx</code> ou <code>.map</code> : celle dont la référence figure dans le nom du fichier.</li>
+<li>Saisissez le mot de passe si la table est chiffrée (<code>.map</code>), puis cliquez sur <strong>Rétablir et télécharger</strong>.</li>
 </ol>
 </div>
 <div class="callout see"><span class="label mono">Vous devez voir</span><span>Votre navigateur télécharge le fichier avec les vraies valeurs.</span></div>
