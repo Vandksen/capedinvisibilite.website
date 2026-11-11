@@ -285,6 +285,7 @@ h3 { font-size: 23px; font-weight: 500; letter-spacing: -.015em; line-height: 1.
 .step-title { display: flex; flex-direction: column; gap: 10px; }
 .step h2 { font-size: clamp(30px, 3.4vw, 42px); }
 .step-why { color: var(--muted); }
+.release .step-num { font-size: clamp(30px, 3.4vw, 42px); line-height: 1.1; }
 .os { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 16px; }
 .card { display: flex; flex-direction: column; gap: 14px; padding: 24px; }
 .card ol { display: flex; flex-direction: column; gap: 10px; padding-left: 22px; list-style: decimal; }
@@ -369,6 +370,13 @@ code {
 <li><a href="#etape-5"><span class="n">5</span><span class="label-text">Pseudonymiser vos fichiers</span></a></li>
 <li><a href="#etape-6"><span class="n">6</span><span class="label-text">Utiliser l'IA</span></a></li>
 <li><a href="#etape-7"><span class="n">7</span><span class="label-text">Rétablir les vraies valeurs</span></a></li>
+</ol>
+</div>
+<div class="steps-group">
+<p class="steps-cat">Notes de mise à jour</p>
+<ol>
+<li><a href="#version-0-3-0"><span class="n">0.3</span><span class="label-text">Version 0.3.0</span></a></li>
+<li><a href="#version-0-2-0"><span class="n">0.2</span><span class="label-text">Version 0.2.0</span></a></li>
 </ol>
 </div>
 </nav>
@@ -603,6 +611,44 @@ code {
 </div>
 <div class="callout see"><span class="label mono">Vous devez voir</span><span>Votre navigateur télécharge le fichier avec les vraies valeurs. Un FEC que vous n'avez pas modifié retrouve son nom et son contenu d'origine, à l'identique.</span></div>
 <div class="callout warn"><span class="label mono">Mauvaise table</span><span>Si le nom du fichier porte la référence d'une autre table, l'application le refuse : déposez la table dont la référence correspond. Les tables <code>.map</code> créées avec la version 0.1.0 restent lisibles.</span></div>
+</section>
+
+<!-- Notes de mise à jour : la plus récente en premier -->
+<section class="step release" id="version-0-3-0">
+<div class="step-head">
+<span class="step-num" aria-hidden="true">0.3</span>
+<div class="step-title">
+<p class="eyebrow">Mise à jour · 11 novembre 2026</p>
+<h2>Version <em>0.3.0</em></h2>
+<p class="step-why">Pour en profiter, téléchargez la nouvelle version (étape 2) et installez-la (étape 3).</p>
+</div>
+</div>
+<div class="panel card">
+<ul>
+<li>Des noms de fichiers plus courts, sans date ni heure : <code>rapport.cloak-3f9a1c.docx</code>. Une table complétée garde son nom.</li>
+<li>Une référence de table à 6 caractères, pour ne plus confondre deux tables.</li>
+<li>Vos fichiers et tables de la version 0.2.0 se rétablissent toujours.</li>
+<li>La cape apparaît dans l'onglet du navigateur et au lancement.</li>
+</ul>
+</div>
+</section>
+
+<section class="step release" id="version-0-2-0">
+<div class="step-head">
+<span class="step-num" aria-hidden="true">0.2</span>
+<div class="step-title">
+<p class="eyebrow">Mise à jour · 11 novembre 2026</p>
+<h2>Version <em>0.2.0</em></h2>
+</div>
+</div>
+<div class="panel card">
+<ul>
+<li>La table est un classeur Excel que vous pouvez relire. Elle n'est chiffrée que si vous choisissez un mot de passe.</li>
+<li>Plusieurs fichiers avec la même table, en une fois ou plus tard : une même valeur garde le même code.</li>
+<li>Plusieurs FEC dans une même table, chacun rétabli à l'identique.</li>
+<li>Un fichier déposé avec la mauvaise table est refusé.</li>
+</ul>
+</div>
 </section>
 
 <div class="guide-end">
