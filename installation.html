@@ -285,6 +285,10 @@ h3 { font-size: 23px; font-weight: 500; letter-spacing: -.015em; line-height: 1.
 .step-title { display: flex; flex-direction: column; gap: 10px; }
 .step h2 { font-size: clamp(30px, 3.4vw, 42px); }
 .step-why { color: var(--muted); }
+.journal { scroll-margin-top: 72px; }
+.journal-head { display: flex; flex-direction: column; gap: 10px; padding-block: clamp(44px, 6vw, 72px) 0; border-top: 1px solid var(--line); }
+.journal-head h2 { font-size: clamp(30px, 3.4vw, 42px); }
+.journal .step:first-of-type { border-top: 0; }
 .release .step-num { font-size: clamp(30px, 3.4vw, 42px); line-height: 1.1; }
 .os { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 16px; }
 .card { display: flex; flex-direction: column; gap: 14px; padding: 24px; }
@@ -373,10 +377,8 @@ code {
 </ol>
 </div>
 <div class="steps-group">
-<p class="steps-cat">Notes de mise à jour</p>
 <ol>
-<li><a href="#version-0-3-0"><span class="n">0.3</span><span class="label-text">Version 0.3.0</span></a></li>
-<li><a href="#version-0-2-0"><span class="n">0.2</span><span class="label-text">Version 0.2.0</span></a></li>
+<li><a href="#journal"><span class="n"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg></span><span class="label-text">Journal des mises à jour</span></a></li>
 </ol>
 </div>
 </nav>
@@ -613,7 +615,13 @@ code {
 <div class="callout warn"><span class="label mono">Mauvaise table</span><span>Si le nom du fichier porte la référence d'une autre table, l'application le refuse : déposez la table dont la référence correspond. Les tables <code>.map</code> créées avec la version 0.1.0 restent lisibles.</span></div>
 </section>
 
-<!-- Notes de mise à jour : toutes ici, la plus récente en premier ; le menu ne montre que les deux dernières -->
+<!-- Journal des mises à jour : toutes les versions, la plus récente en premier -->
+<div class="journal" id="journal">
+<div class="journal-head">
+<p class="eyebrow">Journal des mises à jour</p>
+<h2>Ce qui a <em>changé</em></h2>
+</div>
+
 <section class="step release" id="version-0-3-0">
 <div class="step-head">
 <span class="step-num" aria-hidden="true">0.3</span>
@@ -667,6 +675,7 @@ code {
 </ul>
 </div>
 </section>
+</div>
 
 <div class="guide-end">
 <p class="eyebrow">Besoin d'aide ?</p>
