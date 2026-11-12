@@ -247,8 +247,8 @@ h3 { font-size: 23px; font-weight: 500; letter-spacing: -.015em; line-height: 1.
 .steps-nav ol { display: flex; flex-direction: column; gap: 2px; }
 .steps-group + .steps-group { margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--line); }
 .steps-cat { margin: 0; padding: 4px 10px 6px; color: var(--blue); font-family: var(--mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; }
-.steps-cat:has(.steps-version) { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
-.steps-version { color: var(--muted); text-transform: none; letter-spacing: 0; }
+.steps-cat:has(.steps-version) { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.steps-version.pill { padding: 3px 9px; text-transform: none; letter-spacing: 0; }
 .steps-nav a {
   display: flex;
   align-items: center;
@@ -355,7 +355,7 @@ code {
 
 <nav class="steps-nav" aria-label="Étapes de l'installation">
 <div class="steps-group">
-<p class="steps-cat">Installation <span class="steps-version">v0.3.0</span></p>
+<p class="steps-cat">Installation <span class="steps-version pill on">v0.3.0</span></p>
 <ol>
 <li><a href="#etape-1"><span class="n">1</span><span class="label-text">Installer Python</span></a></li>
 <li><a href="#etape-2"><span class="n">2</span><span class="label-text">Récupérer l'application</span></a></li>
