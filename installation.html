@@ -341,7 +341,7 @@ code {
 
 <header class="site-header">
 <div class="wrap">
-<a class="logo" href="index.html#accueil">CAPE D'<span>INVISIBILITÉ</span><sup class="beta">Bêta · v0.3.0</sup></a>
+<a class="logo" href="index.html#accueil">CAPE D'<span>INVISIBILITÉ</span><sup class="beta">Bêta · v0.4.0</sup></a>
 <nav class="site-nav" aria-label="Navigation principale">
 <a href="index.html#probleme">Le problème</a>
 <a href="index.html#solution">La solution</a>
@@ -356,7 +356,7 @@ code {
 
 <nav class="steps-nav" aria-label="Étapes de l'installation">
 <div class="steps-group">
-<p class="steps-cat">Installation <span class="steps-version pill on">v0.3.0</span></p>
+<p class="steps-cat">Installation <span class="steps-version pill on">v0.4.0</span></p>
 <ol>
 <li><a href="#etape-1"><span class="n">1</span><span class="label-text">Installer Python</span></a></li>
 <li><a href="#etape-2"><span class="n">2</span><span class="label-text">Récupérer l'application</span></a></li>
@@ -435,8 +435,8 @@ code {
 <div class="os">
 <div class="panel card">
 <span class="pill on">Sur PC</span>
-<a class="btn" href="telechargements/cape-d-invisibilite-0.3.0-pc.zip" download>Télécharger pour PC<svg class="chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></a>
-<span class="small">Archive ZIP · 54 Ko</span>
+<a class="btn" href="telechargements/cape-d-invisibilite-0.4.0-pc.zip" download>Télécharger pour PC<svg class="chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></a>
+<span class="small">Archive ZIP · 62 Ko</span>
 <ol>
 <li>Dans vos téléchargements, faites un clic droit sur l'archive, puis <strong>Extraire tout</strong>.</li>
 <li>Placez le dossier <code>cape-d-invisibilite</code> à son emplacement définitif, par exemple dans <code>Documents</code>.</li>
@@ -444,8 +444,8 @@ code {
 </div>
 <div class="panel card">
 <span class="pill on">Sur Mac</span>
-<a class="btn" href="telechargements/cape-d-invisibilite-0.3.0-mac.zip" download>Télécharger pour Mac<svg class="chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></a>
-<span class="small">Archive ZIP · 54 Ko</span>
+<a class="btn" href="telechargements/cape-d-invisibilite-0.4.0-mac.zip" download>Télécharger pour Mac<svg class="chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></a>
+<span class="small">Archive ZIP · 62 Ko</span>
 <ol>
 <li>Dans vos téléchargements, double-cliquez sur l'archive pour la décompresser.</li>
 <li>Placez le dossier <code>cape-d-invisibilite</code> à son emplacement définitif, par exemple dans <code>Documents</code>.</li>
@@ -569,6 +569,7 @@ code {
 <ol>
 <li>Dans la partie « Pseudonymiser », choisissez un mot de passe si vous voulez chiffrer la table de correspondance. Sans mot de passe, elle est un classeur Excel en clair, que vous pouvez ouvrir pour contrôler ce qui a été masqué. Le bouton <strong>Afficher</strong> permet de vérifier votre saisie.</li>
 <li>Pour compléter une table déjà créée, déposez-la d'abord dans la zone « Table existante » (avec son mot de passe si elle est chiffrée). Sinon, laissez cette zone vide : une nouvelle table est créée.</li>
+<li>Si besoin, cochez une option : <strong>Figer les valeurs</strong> (Excel) remplace chaque formule par son résultat, pour que l'IA lise les totaux ; <strong>Retirer les images</strong> (Word) enlève captures, scans et signatures. Ces deux changements ne sont pas annulés au rétablissement.</li>
 <li>Déposez un ou plusieurs fichiers dans la zone prévue : Word (<code>.docx</code>), Excel (<code>.xlsx</code>) ou FEC (<code>.txt</code>). Vous pouvez mélanger les formats, et déposer les FEC de plusieurs sociétés ou de plusieurs exercices : chaque société reçoit son propre SIREN fictif.</li>
 <li>Récupérez l'archive ZIP téléchargée par le navigateur, puis décompressez-la. Pour plusieurs fichiers, elle s'appelle <code>cape-3f9a1c.zip</code>.</li>
 </ol>
@@ -624,12 +625,29 @@ code {
 <h2>Ce qui a <em>changé</em></h2>
 </div>
 
+<section class="step release" id="version-0-4-0">
+<div class="step-head">
+<div class="step-title">
+<p class="eyebrow">Mise à jour · 13 novembre 2026</p>
+<h2>Version <em>0.4.0</em></h2>
+<p class="step-why">Pour en profiter, téléchargez la nouvelle version (étape 2) et installez-la (étape 3).</p>
+</div>
+</div>
+<div class="panel card">
+<ul>
+<li>Plus de numéros reconnus et masqués : SIREN, TVA, IBAN, téléphones ou cartes bancaires écrits avec des espaces ou des tirets.</li>
+<li>Word et Excel mieux protégés : graphiques, objets intégrés, tableaux croisés dynamiques et nom du fichier sont aussi traités.</li>
+<li>Deux options : « Figer les valeurs » (Excel) et « Retirer les images » (Word).</li>
+<li>Vos tables de la version 0.3.0 se rétablissent toujours. Un fichier traité de nouveau peut recevoir d'autres codes.</li>
+</ul>
+</div>
+</section>
+
 <section class="step release" id="version-0-3-0">
 <div class="step-head">
 <div class="step-title">
 <p class="eyebrow">Mise à jour · 11 novembre 2026</p>
 <h2>Version <em>0.3.0</em></h2>
-<p class="step-why">Pour en profiter, téléchargez la nouvelle version (étape 2) et installez-la (étape 3).</p>
 </div>
 </div>
 <div class="panel card">
@@ -686,7 +704,7 @@ code {
 
 <footer class="site-footer">
 <div class="wrap">
-<span class="logo">CAPE D'<span>INVISIBILITÉ</span><sup class="beta">Bêta · v0.3.0</sup></span>
+<span class="logo">CAPE D'<span>INVISIBILITÉ</span><sup class="beta">Bêta · v0.4.0</sup></span>
 <nav class="legal" aria-label="Liens légaux">
 <a href="mentions-legales.html">Mentions légales</a>
 <a href="mentions-legales.html#donnees">Politique de confidentialité</a>
