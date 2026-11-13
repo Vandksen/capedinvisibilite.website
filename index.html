@@ -256,7 +256,47 @@ h3 { font-size: 23px; font-weight: 500; letter-spacing: -.015em; line-height: 1.
   line-height: 1.4;
 }
 .compare-step svg { flex: none; color: var(--blue); }
-.compare figcaption { padding: 2px 26px 20px; color: var(--muted); font-family: var(--mono); font-size: 12px; }
+.compare figcaption { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; padding: 2px 26px 20px; color: var(--muted); font-family: var(--mono); font-size: 12px; }
+
+/* Table de correspondance de l'exemple : au survol, au focus clavier ou au toucher du bouton */
+.compare { position: relative; }
+.peek-btn {
+  padding: 6px 12px;
+  border: 1px solid rgba(17, 54, 219, .35);
+  border-radius: 9999px;
+  background: transparent;
+  color: var(--blue);
+  font: 400 12px/1.2 var(--mono);
+  cursor: pointer;
+}
+.peek-btn:hover, .peek-btn[aria-expanded="true"] { border-color: var(--blue); background: rgba(17, 54, 219, .08); }
+.peek-panel {
+  position: absolute;
+  inset: 0 0 56px 0;
+  z-index: 2;
+  overflow: auto;
+  padding: 20px 24px 16px;
+  border: 2px solid var(--blue);
+  border-radius: 10px;
+  background: var(--paper);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition: opacity .2s ease, transform .2s ease, visibility .2s;
+}
+.compare[data-table="ouverte"] .peek-panel {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+.peek-table { width: 100%; margin: 4px 0 12px; border-collapse: collapse; font-family: var(--mono); font-size: 13px; }
+.peek-table th, .peek-table td { padding: 7px 0; border-top: 1px solid var(--line); text-align: left; }
+.peek-table th { padding-top: 4px; border-top: 0; color: var(--muted); font-size: 11px; font-weight: 400; letter-spacing: .05em; text-transform: uppercase; }
+.peek-table td { color: var(--ink); }
+.peek-table th + th, .peek-table td + td { text-align: right; }
+.peek-table td + td { color: var(--blue); }
+.peek-panel > .note { line-height: 1.5; }
+@media (prefers-reduced-motion: reduce) { .peek-panel { transition: none; transform: none; } }
 
 /* Le problème */
 .problem-text { display: flex; flex-direction: column; gap: 20px; }
@@ -411,7 +451,7 @@ details[open] summary span { transform: rotate(45deg); }
 </div>
 <div class="row"><span>Facture ARTHUR ET FILS SARL — FA2026001234</span><span class="amount">1 200,00</span></div>
 <div class="row"><span>Virement M MARCHAL Henri — 06 12 34 56 78</span><span class="amount">450,00</span></div>
-<div class="row"><span>Honoraires Cabinet BREVANDIER</span><span class="amount">3 600,00</span></div>
+<div class="row"><span>Honoraires Cabinet CECILIA</span><span class="amount">3 600,00</span></div>
 </div>
 <div class="compare-step">
 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14"></path><path d="M6 13l6 6 6-6"></path></svg>
@@ -422,11 +462,32 @@ details[open] summary span { transform: rotate(45deg); }
 <span class="pill on">Après — envoyé à l'IA</span>
 <span class="note">aucun nom, aucun numéro</span>
 </div>
-<div class="row"><span>Facture <span class="hl">41c47f3</span> SARL — <span class="hl">3e81cc81181005195</span></span><span class="amount">1 200,00</span></div>
-<div class="row"><span>Virement M <span class="hl">9f47f90</span> <span class="hl">b62e1d4</span> — <span class="hl">76 34 60 79 83</span></span><span class="amount">450,00</span></div>
-<div class="row"><span>Honoraires <span class="hl">30d0a11</span> <span class="hl">357d226</span></span><span class="amount">3 600,00</span></div>
+<div class="row"><span>Facture <span class="hl">c5249dd</span> ET <span class="hl">43e4298</span> SARL — <span class="hl">01a472c7111462635</span></span><span class="amount">1 200,00</span></div>
+<div class="row"><span>Virement M <span class="hl">e47c094</span> <span class="hl">12bb70b</span> — <span class="hl">21 02 88 58 27</span></span><span class="amount">450,00</span></div>
+<div class="row"><span>Honoraires <span class="hl">a698a42</span> <span class="hl">1a32d94</span></span><span class="amount">3 600,00</span></div>
 </div>
-<figcaption>Exemple fictif.</figcaption>
+<div class="peek-panel" id="table-exemple" role="region" aria-label="Table de correspondance de l'exemple">
+<div class="compare-head">
+<span class="pill on">Table de correspondance</span>
+<span class="note">reste sur votre poste</span>
+</div>
+<table class="peek-table">
+<thead><tr><th scope="col">Valeur d'origine</th><th scope="col">Code envoyé à l'IA</th></tr></thead>
+<tbody>
+<tr><td>ARTHUR</td><td>c5249dd</td></tr>
+<tr><td>FILS</td><td>43e4298</td></tr>
+<tr><td>FA</td><td>01a472c</td></tr>
+<tr><td>2026001234</td><td>7111462635</td></tr>
+<tr><td>MARCHAL</td><td>e47c094</td></tr>
+<tr><td>Henri</td><td>12bb70b</td></tr>
+<tr><td>06 12 34 56 78</td><td>21 02 88 58 27</td></tr>
+<tr><td>Cabinet</td><td>a698a42</td></tr>
+<tr><td>CECILIA</td><td>1a32d94</td></tr>
+</tbody>
+</table>
+<p class="note">Les noms deviennent des codes, les numéros des chiffres fictifs de même forme. Les mots courants (Facture, ET, SARL, M) restent.</p>
+</div>
+<figcaption><span>Exemple fictif.</span><button class="peek-btn" type="button" aria-expanded="false" aria-controls="table-exemple">Voir la table de correspondance</button></figcaption>
 </figure>
 </div>
 </section>
@@ -630,5 +691,31 @@ details[open] summary span { transform: rotate(45deg); }
 </div>
 </footer>
 
+<script>
+// Table de correspondance de l'exemple : visible au survol du bouton (ou de la table), au focus
+// clavier, ou après un toucher / clic qui la fixe ; Échap ou un clic ailleurs la ferme.
+(() => {
+  const exemple = document.querySelector(".compare");
+  const bouton = exemple && exemple.querySelector(".peek-btn");
+  const table = exemple && exemple.querySelector(".peek-panel");
+  if (!bouton || !table) return;
+  let fixee = false, survol = false, focus = false;
+  const majour = () => {
+    const ouverte = fixee || survol || focus;
+    exemple.toggleAttribute("data-table", ouverte);
+    if (ouverte) exemple.setAttribute("data-table", "ouverte");
+    bouton.setAttribute("aria-expanded", String(ouverte));
+  };
+  for (const el of [bouton, table]) {
+    el.addEventListener("mouseenter", () => { survol = true; majour(); });
+    el.addEventListener("mouseleave", () => { survol = false; majour(); });
+  }
+  bouton.addEventListener("focus", () => { focus = bouton.matches(":focus-visible"); majour(); });
+  bouton.addEventListener("blur", () => { focus = false; majour(); });
+  bouton.addEventListener("click", () => { fixee = !fixee; majour(); });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape") { fixee = survol = focus = false; majour(); } });
+  document.addEventListener("click", (e) => { if (!exemple.contains(e.target)) { fixee = survol = false; majour(); } });
+})();
+</script>
 </body>
 </html>
