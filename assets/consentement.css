@@ -1,0 +1,54 @@
+/* Bandeau de consentement à la mesure d'audience (voir consentement.js) */
+.consentement {
+  position: fixed;
+  z-index: 100;
+  right: 16px;
+  bottom: 16px;
+  left: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px 24px;
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 18px 22px;
+  border: 2px solid #1136DB;
+  border-radius: 10px;
+  background: #FCF9F1;
+  box-shadow: 0 30px 60px -30px rgba(17, 54, 219, .45), 0 2px 10px rgba(27, 36, 80, .1);
+  color: #1B2450;
+  font: 400 15px/1.5 'Inter Tight', system-ui, sans-serif;
+}
+.consentement[hidden] { display: none; }
+.consentement p { flex: 1 1 380px; margin: 0; }
+.consentement a { color: #1136DB; }
+.consentement-choix { display: flex; flex: none; gap: 10px; }
+.consentement-choix button {
+  min-width: 112px;
+  min-height: 44px;
+  padding: 0 20px;
+  border: 1px solid #1136DB;
+  border-radius: 9999px;
+  background: transparent;
+  color: #1136DB;
+  font: 500 15px/1 'Inter Tight', system-ui, sans-serif;
+  cursor: pointer;
+}
+.consentement-choix button[data-choix="accord"] { background: #1136DB; color: #F8F3E6; }
+.consentement-choix button:hover { border-color: #0D2BB5; }
+.consentement-choix button[data-choix="accord"]:hover { background: #0D2BB5; }
+.lien-cookies {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}
+@media (max-width: 560px) {
+  .consentement-choix { width: 100%; }
+  .consentement-choix button { flex: 1; }
+}
+.legal .lien-cookies { color: #1B2450; }

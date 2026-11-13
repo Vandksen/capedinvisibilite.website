@@ -198,6 +198,8 @@ h3 { font-size: 23px; font-weight: 500; letter-spacing: -.015em; line-height: 1.
 .legal-page section { display: flex; flex-direction: column; gap: 10px; padding-top: 32px; border-top: 1px solid var(--line); scroll-margin-top: 88px; }
 .legal-page h2 { font-size: clamp(26px, 3vw, 34px); }
 </style>
+<link rel="stylesheet" href="assets/consentement.css">
+<script src="assets/consentement.js" defer></script>
 </head>
 <body>
 
@@ -249,14 +251,17 @@ h3 { font-size: 23px; font-weight: 500; letter-spacing: -.015em; line-height: 1.
 <section id="donnees">
 <h2>Données <em>personnelles</em></h2>
 <p>Le site ne propose ni formulaire ni création de compte : il ne vous demande aucune donnée personnelle.</p>
-<p>Lors de votre visite, l'hébergeur GitHub peut traiter votre adresse IP pour fournir et sécuriser le site.</p>
+<p>Lors de votre visite, l'hébergeur GitHub peut traiter votre adresse IP pour fournir et sécuriser le site. Avec votre accord seulement, Google Analytics mesure l'audience du site (voir <a href="#cookies">Cookies et mesure d'audience</a>).</p>
 <p>L'application fonctionne sur votre poste : les fichiers que vous y déposez ne sont pas transmis à l'éditeur.</p>
 <p>Le responsable du traitement est Simon Bazart-Maitre EI. Conformément au RGPD, vous disposez d'un droit d'accès, de rectification et de suppression : écrivez à <a href="mailto:simon@structurre.fr">simon@structurre.fr</a>. Vous pouvez aussi adresser une réclamation à la <a href="https://www.cnil.fr">CNIL</a>.</p>
 </section>
 
-<section>
-<h2><em>Cookies</em></h2>
-<p>Ce site ne dépose aucun cookie de mesure d'audience ni de publicité. Seules les polices Google Fonts sont chargées depuis un service tiers, auquel votre adresse IP est alors transmise.</p>
+<section id="cookies">
+<h2><em>Cookies</em> et mesure d'audience</h2>
+<p>Ce site utilise Google Analytics (Google Ireland Limited) pour compter ses visites, les pages consultées et les téléchargements de l'application, <strong>uniquement si vous l'acceptez</strong> dans le bandeau affiché à votre première visite. Sans accord, aucun cookie de mesure n'est déposé et rien n'est envoyé à Google Analytics.</p>
+<p>Si vous acceptez, Google Analytics dépose des cookies (<code>_ga</code>, <code>_ga_…</code>) pour 13 mois au plus et reçoit des informations techniques sur votre visite (pages vues, appareil, navigateur, ville approximative). Ces données peuvent être traitées hors de l'Union européenne, notamment aux États-Unis, dans le cadre du Data Privacy Framework. Elles ne servent qu'à mesurer l'audience du site, sans publicité.</p>
+<p>Votre choix est gardé 6 mois dans votre navigateur. Vous pouvez le modifier à tout moment : <button type="button" class="lien-cookies" data-gerer-cookies>gérer les cookies</button>. Les polices Google Fonts sont par ailleurs chargées depuis un service tiers, auquel votre adresse IP est alors transmise.</p>
+<p>Cette mesure concerne uniquement le site. L'application Cape d'invisibilité ne contient aucune mesure d'audience et ne transmet aucune donnée.</p>
 </section>
 <section id="limites">
 <h2>Limites <em>de la pseudonymisation</em></h2>
@@ -272,6 +277,7 @@ h3 { font-size: 23px; font-weight: 500; letter-spacing: -.015em; line-height: 1.
 <nav class="legal" aria-label="Liens légaux">
 <a href="mentions-legales.html">Mentions légales</a>
 <a href="mentions-legales.html#donnees">Politique de confidentialité</a>
+<button type="button" class="lien-cookies" data-gerer-cookies>Gérer les cookies</button>
 <span class="projet">Un projet <a href="https://structurre.fr"><img src="assets/structurre.svg" alt="" width="20" height="20">STRUCTURRE</a></span>
 </nav>
 </div>

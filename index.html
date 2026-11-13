@@ -405,6 +405,8 @@ details[open] summary span { transform: rotate(45deg); }
 .legal .projet { display: inline-flex; align-items: center; gap: 6px; }
 .legal .projet a { display: inline-flex; align-items: center; gap: 4px; }
 </style>
+<link rel="stylesheet" href="assets/consentement.css">
+<script src="assets/consentement.js" defer></script>
 </head>
 <body>
 
@@ -582,7 +584,7 @@ details[open] summary span { transform: rotate(45deg); }
 </div>
 <ul class="checks">
 <li><span class="title">Aucune donnée transmise</span><span class="detail">traitement sur le poste</span></li>
-<li><span class="title">Aucune télémétrie</span><span class="detail">ni API, ni analytics</span></li>
+<li><span class="title">Aucune télémétrie</span><span class="detail">dans l'application : ni API, ni analytics</span></li>
 <li><span class="title">Table chez vous</span><span class="detail">chiffrée (AES) avec un mot de passe</span></li>
 <li><span class="title">Fichiers temporaires supprimés</span><span class="detail">après traitement</span></li>
 </ul>
@@ -679,6 +681,7 @@ details[open] summary span { transform: rotate(45deg); }
 <nav class="legal" aria-label="Liens légaux">
 <a href="mentions-legales.html">Mentions légales</a>
 <a href="mentions-legales.html#donnees">Politique de confidentialité</a>
+<button type="button" class="lien-cookies" data-gerer-cookies>Gérer les cookies</button>
 <span class="projet">Un projet <a href="https://structurre.fr"><img src="assets/structurre.svg" alt="" width="20" height="20">STRUCTURRE</a></span>
 </nav>
 </div>
