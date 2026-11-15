@@ -252,9 +252,10 @@ h3 { font-size: 23px; font-weight: 500; letter-spacing: -.015em; line-height: 1.
 
 /* Lexique : menu à gauche, en accordéon comme la documentation */
 .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
-.lex-page { display: grid; grid-template-columns: 248px minmax(0, 1fr); gap: clamp(32px, 4vw, 56px); max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.lex-page { max-width: 1200px; margin: 0 auto; padding: 0 24px 0 calc(24px + 248px + clamp(32px, 4vw, 56px)); }
 .lex-main { max-width: 860px; margin: 0; padding-inline: 0; }
-.lex-aside { position: sticky; top: var(--menu-haut, 88px); align-self: start; margin-top: clamp(56px, 8vw, 96px); max-height: calc(100vh - var(--menu-haut, 88px) - 20px); overflow-y: auto; scrollbar-width: thin; }
+/* Menu fixe, ancré 20 px sous l'en-tête comme celui de la documentation */
+.lex-aside { position: fixed; z-index: 50; top: var(--menu-haut, 102px); left: max(24px, calc((100vw - 1200px) / 2 + 24px)); width: 248px; max-height: calc(100vh - var(--menu-haut, 102px) - 20px); overflow-y: auto; scrollbar-width: thin; border-radius: 10px; }
 .lex-nav { padding: 10px; border: 2px solid var(--blue); border-radius: 10px; background: var(--paper); box-shadow: 0 30px 60px -30px rgba(17, 54, 219, .32), 0 2px 10px rgba(27, 36, 80, .06); }
 .lex-nav ol { display: flex; flex-direction: column; gap: 1px; }
 .lex-groupe + .lex-groupe { margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--line); }
@@ -277,6 +278,9 @@ h3 { font-size: 23px; font-weight: 500; letter-spacing: -.015em; line-height: 1.
 .lex-lettres a { display: grid; place-items: center; height: 28px; border-radius: 6px; color: var(--ink); font-family: var(--mono); font-size: 12px; text-decoration: none; }
 .lex-lettres a:hover { background: rgba(17, 54, 219, .08); color: var(--blue); }
 
+.site-footer .wrap { padding-left: calc(24px + 248px + clamp(32px, 4vw, 56px)); }
+@media (max-width: 900px) { .site-footer .wrap { padding-left: 16px; } }
+
 /* Recherche et filtres */
 .recherche input { width: 100%; min-height: 48px; padding: 0 16px; border: 1px solid var(--line); border-radius: 6px; background: #fff; color: var(--ink); font: 400 17px var(--sans); }
 .recherche input:focus-visible { outline: 2px solid var(--blue); outline-offset: 1px; }
@@ -289,17 +293,20 @@ h3 { font-size: 23px; font-weight: 500; letter-spacing: -.015em; line-height: 1.
 .resultat { font-family: var(--mono); font-size: 13px; color: var(--muted); }
 .mots li[hidden], .rubrique[hidden], [data-section][hidden] { display: none; }
 
+/* Mobile : comme la documentation, le menu devient une barre fixée en bas de l'écran */
 @media (max-width: 900px) {
-  .lex-page { grid-template-columns: minmax(0, 1fr); gap: 0; padding: 0; }
-  .lex-main { padding-inline: 16px; padding-top: 40px; }
-  .lex-aside { z-index: 40; margin: 0; max-height: none; overflow: visible; }
-  .lex-nav { display: flex; align-items: center; gap: 4px; padding: 6px 16px; overflow-x: auto; border: 0; border-bottom: 1px solid var(--line); border-radius: 0; box-shadow: none; scrollbar-width: none; }
+  body { padding-bottom: 76px; }
+  .lex-page { padding: 0; }
+  .lex-main { padding-inline: 16px; }
+  .lex-aside { top: auto; bottom: 12px; left: 50%; width: max-content; max-width: calc(100% - 24px); max-height: none; overflow: visible; transform: translateX(-50%); border-radius: 9999px; }
+  .lex-nav { display: flex; align-items: center; gap: 2px; padding: 4px; overflow-x: auto; border-radius: 9999px; scrollbar-width: none; }
   .lex-nav::-webkit-scrollbar { display: none; }
   .lex-groupe, .lex-groupe + .lex-groupe { display: flex; flex: none; margin: 0; padding: 0; border: 0; }
   .lex-nav ol { flex-direction: row; flex: none; }
   .lex-nav .sous, .lex-cat { display: none; }
   .lex-nav a.seul-mobile { display: block; }
-  .lex-nav a { padding: 6px 10px; border-radius: 8px; color: var(--ink); white-space: nowrap; font-size: 14px; text-decoration: none; }
+  .lex-nav a { padding: 8px 12px; border-radius: 9999px; color: var(--ink); white-space: nowrap; font-size: 14px; text-decoration: none; }
+  .site-footer .wrap { padding-bottom: 24px; }
 }
 </style>
 <link rel="stylesheet" href="assets/consentement.css">
@@ -792,7 +799,7 @@ h3 { font-size: 23px; font-weight: 500; letter-spacing: -.015em; line-height: 1.
   if (!entete) return;
   const placer = () => {
     const bas = Math.max(0, entete.getBoundingClientRect().bottom);
-    const ecart = matchMedia("(max-width: 900px)").matches ? 0 : 20;
+    const ecart = 20;
     document.documentElement.style.setProperty("--menu-haut", Math.round(bas + ecart) + "px");
   };
   addEventListener("scroll", placer, { passive: true });
