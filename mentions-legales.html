@@ -217,6 +217,8 @@ h3 { font-size: 23px; font-weight: 500; letter-spacing: -.015em; line-height: 1.
 .legal-page { display: flex; flex-direction: column; gap: 40px; max-width: 800px; margin: 0 auto; padding: clamp(56px, 8vw, 96px) 24px var(--section); }
 .legal-page section { display: flex; flex-direction: column; gap: 10px; padding-top: 32px; border-top: 1px solid var(--line); scroll-margin-top: 88px; }
 .legal-page h2 { font-size: clamp(26px, 3vw, 34px); }
+.legal-page h3 { margin-top: 14px; font-size: 19px; }
+.legal-page section ul { display: flex; flex-direction: column; gap: 6px; padding-left: 1.25em; list-style: disc; }
 </style>
 <link rel="stylesheet" href="assets/consentement.css">
 <script src="assets/consentement.js" defer></script>
@@ -288,8 +290,44 @@ h3 { font-size: 23px; font-weight: 500; letter-spacing: -.015em; line-height: 1.
 </section>
 <section id="limites">
 <h2>Limites <em>de la pseudonymisation</em></h2>
-<p>Cape d'invisibilité repère et remplace automatiquement les noms, numéros et coordonnées. Ce repérage n'est pas infaillible : un élément inhabituel peut ne pas être détecté. Relisez chaque fichier pseudonymisé avant de le transmettre à un service tiers.</p>
-<p>Le fichier obtenu reste une donnée pseudonymisée au sens du RGPD (art. 4.5), et non une donnée anonyme : vous demeurez responsable des traitements que vous effectuez et des données que vous transmettez. Le logiciel est fourni « en l'état », sans garantie, conformément à sa licence MIT.</p>
+<p>Ces conditions s'appliquent à toute utilisation de Cape d'invisibilité, en plus de la licence sous laquelle votre version est distribuée. En utilisant le logiciel, vous les acceptez.</p>
+
+<h3>Ce que fait l'application</h3>
+<p>Cape d'invisibilité repère et remplace automatiquement les noms, numéros et coordonnées, sur votre poste. Ce repérage n'est pas infaillible : un élément inhabituel peut lui échapper. Le logiciel est en version bêta.</p>
+<p>Le fichier obtenu est pseudonymisé au sens du RGPD (art. 4.5), et non anonymisé : grâce à la table de correspondance, les vraies valeurs restent retrouvables. Pour vous, il contient donc toujours des données personnelles.</p>
+
+<h3>Qui est responsable de quoi</h3>
+<p>L'éditeur n'a accès à aucun fichier, aucune table ni aucune donnée que vous traitez avec l'application : rien ne lui est transmis. Il n'est donc, pour ces données, ni responsable de traitement ni sous-traitant au sens du RGPD (art. 4 et 28).</p>
+<p>Vous restez seul responsable de vos traitements : des données que vous choisissez de traiter, de l'IA à laquelle vous les confiez, de ce que vous lui transmettez et de la conservation de la table.</p>
+
+<h3>Vos engagements</h3>
+<ul>
+<li>Relire chaque fichier pseudonymisé avant de le transmettre, et chaque fichier rétabli avant de l'utiliser.</li>
+<li>Vérifier que vous avez le droit de confier ces données à une IA : secret professionnel, contrats avec vos clients, règles internes, conditions d'utilisation de l'IA choisie.</li>
+<li>Garder la table sur votre poste, ne jamais l'envoyer à l'IA ni à un tiers, et la sauvegarder.</li>
+<li>Conserver le mot de passe d'une table chiffrée : sans lui, personne, pas même l'éditeur, ne peut la récupérer.</li>
+<li>Utiliser la dernière version, téléchargée depuis capedinvisibilite.fr.</li>
+</ul>
+
+<h3>Ce que l'application ne couvre pas</h3>
+<p>L'éditeur ne répond pas des conséquences suivantes, qui relèvent de vos vérifications :</p>
+<ul>
+<li>un nom, un numéro ou une coordonnée non détecté, par exemple un mot courant employé comme nom propre ;</li>
+<li>la réidentification d'une personne ou d'une société par recoupement : les montants, les dates, les comptes et le contexte ne sont pas masqués ;</li>
+<li>un élément que l'application ne traite pas ou pas entièrement, comme le texte visible dans une image conservée ;</li>
+<li>la perte, le vol ou la divulgation de la table, lisible par tous lorsqu'elle n'est pas protégée par un mot de passe, ou l'oubli de ce mot de passe ;</li>
+<li>une réponse erronée ou incomplète de l'IA, ou des codes qu'elle a modifiés et qui ne peuvent être rétablis ;</li>
+<li>un rétablissement imparfait : graphie d'une valeur, images retirées, formules figées et métadonnées effacées ne reviennent pas ;</li>
+<li>l'usage d'une version de plus de 30 jours, ou d'une copie modifiée ou redistribuée par un tiers.</li>
+</ul>
+
+<h3>Garantie et responsabilité</h3>
+<p>Les versions gratuites du logiciel sont fournies « en l'état », sans aucune garantie : ni absence d'erreur, ni détection complète, ni adéquation à un usage particulier. Une version payante serait régie par ses propres conditions de vente, qui primeraient sur cette section pour cette version.</p>
+<p>Dans toute la mesure permise par la loi, l'éditeur n'est pas responsable des dommages indirects ou immatériels liés à l'usage du logiciel : perte de données ou de clientèle, atteinte à l'image, sanction, réclamation d'un tiers. Envers un professionnel, sa responsabilité, si elle était retenue, est limitée à 100 euros.</p>
+<p>Ces limites ne s'appliquent pas en cas de faute lourde ou intentionnelle de l'éditeur, ni à un dommage corporel. Elles ne privent pas un consommateur des droits que la loi lui garantit.</p>
+
+<h3>Droit applicable</h3>
+<p>Ces conditions sont soumises au droit français. En cas de différend, écrivez d'abord à <a href="mailto:simon@structurre.fr">simon@structurre.fr</a> pour chercher une solution amiable. À défaut, les tribunaux compétents sont ceux désignés par la loi ; entre commerçants, ceux de Strasbourg.</p>
 </section>
 
 </main>
