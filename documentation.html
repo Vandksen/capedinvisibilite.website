@@ -139,7 +139,7 @@ h3 { font-size: 23px; font-weight: 500; letter-spacing: -.015em; line-height: 1.
   flex-wrap: nowrap;
   align-items: center;
   justify-content: space-between;
-  gap: 14px 20px;
+  gap: 14px 10px;
   padding-block: 16px;
 }
 .logo {
@@ -163,7 +163,7 @@ h3 { font-size: 23px; font-weight: 500; letter-spacing: -.015em; line-height: 1.
 }
 /* Bureau : logo, menu et bouton sur une ligne ; si la place manque, le menu défile */
 .site-header .logo, .header-cta { flex: none; white-space: nowrap; }
-.site-nav { display: flex; flex: 0 1 auto; flex-wrap: nowrap; gap: 6px clamp(12px, 1.4vw, 16px); min-width: 0; overflow-x: auto; scrollbar-width: none; }
+.site-nav { display: flex; flex: 0 1 auto; flex-wrap: nowrap; gap: 6px clamp(10px, .9vw, 16px); min-width: 0; overflow-x: auto; scrollbar-width: none; }
 .site-nav::-webkit-scrollbar { display: none; }
 .site-nav a { flex: none; white-space: nowrap; }
 .site-nav a {
@@ -175,6 +175,17 @@ h3 { font-size: 23px; font-weight: 500; letter-spacing: -.015em; line-height: 1.
   text-decoration: none;
 }
 .site-nav a:hover { color: var(--blue); }
+/* Bouton Documentation, à côté de « Revêtir la cape » */
+.header-actions { display: flex; flex: none; align-items: center; gap: 8px; }
+.header-doc { min-height: 38px; padding: 0 14px; font-size: 14px; white-space: nowrap; }
+/* Écran moyen : icône seule, pour que le menu tienne sur la ligne */
+@media (max-width: 1240px) {
+  .header-doc { padding: 0 10px; }
+  .header-doc .btn-icon { margin-right: 0; }
+  .header-doc .header-doc-texte { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+}
+.header-doc .btn-icon { margin-right: 6px; image-rendering: auto; }
+.header-doc[aria-current="page"] { background: rgba(17, 54, 219, .1); border-color: var(--blue); }
 
 @media (max-width: 760px) {
   html { scroll-padding-top: 104px; }
@@ -185,6 +196,9 @@ h3 { font-size: 23px; font-weight: 500; letter-spacing: -.015em; line-height: 1.
   .site-nav { order: 3; flex-wrap: nowrap; width: 100%; overflow-x: auto; scrollbar-width: none; }
   .header-cta { min-height: 36px; padding: 0 10px; font-size: 13px; }
   .header-cta .btn-icon { width: 16px; height: 16px; margin-right: 4px; }
+  .header-doc { min-height: 36px; padding: 0 10px; }
+  .header-doc .btn-icon { margin-right: 0; }
+  .header-doc .header-doc-texte { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
   .site-nav::-webkit-scrollbar { display: none; }
   .site-nav a { flex: none; }
 }
@@ -397,9 +411,11 @@ code {
 <a href="index.html#securite">Sécurité</a>
 <a href="index.html#utilisateurs">Utilisateurs</a>
 <a href="index.html#contact">Contact</a>
-<a href="documentation.html" aria-current="page">Documentation</a>
 </nav>
+<div class="header-actions">
+<a class="btn ghost header-doc" href="documentation.html" title="Documentation" aria-current="page"><svg class="btn-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg><span class="header-doc-texte">Documentation</span></a>
 <a class="btn header-cta" href="installation.html"><img class="btn-icon" src="assets/cape.png" alt="" width="24" height="24">Revêtir la cape<svg class="chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></a>
+</div>
 </div>
 </header>
 
@@ -814,39 +830,59 @@ code {
 })();
 
 // Soufflet : si le menu ne tient pas dans la hauteur de l'écran (grand écran seulement), chaque
-// catégorie se replie ; celle de la partie en cours reste ouverte, un clic ouvre ou ferme les autres.
+// catégorie se replie. Restent ouvertes : celle de la partie en cours, celle que survole la souris,
+// et celles ouvertes d'un clic (le clic sert aussi au clavier et au tactile).
 (() => {
   const nav = document.querySelector(".steps-nav");
   if (!nav) return;
   const groupes = [...nav.querySelectorAll(".steps-group")].filter((g) => g.querySelector(".steps-cat"));
   const fleche = '<svg class="fleche" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>';
-  let actif = null;
+  let actif = null, survole = null, sortie = null;
+  const ouverts = new Set(), fermes = new Set();   // choix faits d'un clic
+
+  const actifSoufflet = () => nav.classList.contains("soufflet");
+  const estOuvert = (g) => g === survole || ouverts.has(g) || (g === actif && !fermes.has(g));
+
+  function afficher() {
+    if (!actifSoufflet()) return;
+    groupes.forEach((g) => {
+      const ouvert = estOuvert(g);
+      g.classList.toggle("replie", !ouvert);
+      g.querySelector(".steps-cat").setAttribute("aria-expanded", String(ouvert));
+    });
+  }
 
   groupes.forEach((g) => {
     const titre = g.querySelector(".steps-cat");
     titre.insertAdjacentHTML("beforeend", fleche);
     const basculer = () => {
-      if (!nav.classList.contains("soufflet")) return;
-      g.classList.toggle("replie");
-      titre.setAttribute("aria-expanded", String(!g.classList.contains("replie")));
+      if (!actifSoufflet()) return;
+      const parSurvolSeul = survole === g && !ouverts.has(g) && !(g === actif && !fermes.has(g));
+      if (parSurvolSeul) { ouverts.add(g); }   // ouverte au survol : le clic la garde ouverte
+      else if (estOuvert(g)) { ouverts.delete(g); fermes.add(g); if (survole === g) survole = null; }
+      else { fermes.delete(g); ouverts.add(g); }
+      afficher();
     };
     titre.addEventListener("click", basculer);
     titre.addEventListener("keydown", (e) => {
       if (e.key === "Enter" || e.key === " ") { e.preventDefault(); basculer(); }
     });
+    // Survol : la catégorie s'ouvre tant que la souris est dans le menu
+    g.addEventListener("mouseenter", () => {
+      if (!actifSoufflet() || fermes.has(g)) return;
+      survole = g;
+      afficher();
+    });
+  });
+  nav.addEventListener("mouseenter", () => clearTimeout(sortie));
+  nav.addEventListener("mouseleave", () => {
+    clearTimeout(sortie);
+    sortie = setTimeout(() => { survole = null; afficher(); }, 300);
   });
 
   function groupeCourant() {
     const lien = nav.querySelector('a[aria-current="step"]');
     return lien ? lien.closest(".steps-group") : null;
-  }
-
-  function ouvrirSeulement(courant) {
-    groupes.forEach((g) => {
-      const ouvert = g === courant;
-      g.classList.toggle("replie", !ouvert);
-      g.querySelector(".steps-cat").setAttribute("aria-expanded", String(ouvert));
-    });
   }
 
   function placer() {
@@ -859,17 +895,18 @@ code {
       if (trop) { titre.setAttribute("role", "button"); titre.tabIndex = 0; }
       else { titre.removeAttribute("role"); titre.removeAttribute("tabindex"); titre.removeAttribute("aria-expanded"); }
     });
+    ouverts.clear(); fermes.clear(); survole = null;
     if (!trop) { actif = null; return; }
     nav.classList.add("soufflet");
     actif = groupeCourant();
-    ouvrirSeulement(actif);
+    afficher();
   }
 
-  // La catégorie ouverte suit la lecture (seulement quand on change de catégorie)
+  // La catégorie ouverte suit la lecture ; changer de catégorie efface les choix faits d'un clic
   window.addEventListener("scroll", () => {
-    if (!nav.classList.contains("soufflet")) return;
+    if (!actifSoufflet()) return;
     const courant = groupeCourant();
-    if (courant !== actif) { actif = courant; ouvrirSeulement(courant); }
+    if (courant !== actif) { actif = courant; ouverts.clear(); fermes.clear(); afficher(); }
   }, { passive: true });
   window.addEventListener("resize", placer);
   placer();
