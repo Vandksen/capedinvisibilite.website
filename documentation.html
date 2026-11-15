@@ -297,8 +297,11 @@ h3 { font-size: 23px; font-weight: 500; letter-spacing: -.015em; line-height: 1.
 }
 .steps-nav a[aria-current="step"] { background: var(--blue); color: var(--on-blue); }
 .steps-nav a[aria-current="step"] .n { background: var(--on-blue); color: var(--blue); }
-/* Soufflet : sur un écran trop bas pour le menu entier, une seule catégorie ouverte à la fois */
-@media (min-width: 1041px) { .steps-nav { max-height: calc(100vh - 32px); overflow-y: auto; } }
+/* Soufflet (grand écran) : une seule catégorie ouverte à la fois, les autres au survol ou au clic */
+/* Menu ancré sous l'en-tête (au-delà du mobile) ; --menu-haut est tenu à jour par le script du menu */
+@media (min-width: 761px) {
+  .steps-nav { top: var(--menu-haut, 102px); transform: none; max-height: calc(100vh - var(--menu-haut, 102px) - 20px); overflow-y: auto; }
+}
 .steps-nav.soufflet .steps-cat { display: flex; align-items: center; gap: 8px; border-radius: 8px; cursor: pointer; user-select: none; }
 .steps-nav.soufflet .steps-cat:hover { background: rgba(17, 54, 219, .08); }
 .steps-nav.soufflet .steps-cat:focus-visible { outline: 2px solid var(--blue); outline-offset: 1px; }
@@ -831,7 +834,22 @@ code {
   update();
 })();
 
-// Soufflet : si le menu ne tient pas dans la hauteur de l'écran (grand écran seulement), chaque
+// Menu ancré 20 px sous l'en-tête, même quand le bandeau de consentement le pousse vers le bas
+(() => {
+  const entete = document.querySelector(".site-header");
+  if (!entete) return;
+  const placer = () => {
+    const bas = Math.max(0, entete.getBoundingClientRect().bottom);
+    document.documentElement.style.setProperty("--menu-haut", Math.round(bas + 20) + "px");
+  };
+  addEventListener("scroll", placer, { passive: true });
+  addEventListener("load", placer);
+  addEventListener("resize", placer);
+  new MutationObserver(placer).observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ["hidden", "class"] });
+  placer();
+})();
+
+// Soufflet, toujours actif sur grand écran (sur mobile, le menu est une barre en bas) : chaque
 // catégorie se replie. Restent ouvertes : celle de la partie en cours, celle que survole la souris,
 // et celles ouvertes d'un clic (le clic sert aussi au clavier et au tactile).
 (() => {
@@ -888,10 +906,10 @@ code {
   }
 
   function placer() {
-    // Mesure le menu tout ouvert, puis active le soufflet s'il dépasse la hauteur de l'écran
+    // Soufflet sur grand écran, quelle que soit la hauteur ; sur mobile, le menu est une barre en bas
     nav.classList.remove("soufflet");
     groupes.forEach((g) => g.classList.remove("replie"));
-    const trop = innerWidth > 1040 && nav.scrollHeight > innerHeight - 32;
+    const trop = innerWidth > 1040;
     groupes.forEach((g) => {
       const titre = g.querySelector(".steps-cat");
       if (trop) { titre.setAttribute("role", "button"); titre.tabIndex = 0; }
