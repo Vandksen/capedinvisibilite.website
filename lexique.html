@@ -364,8 +364,8 @@ h3 { font-size: 23px; font-weight: 500; letter-spacing: -.015em; line-height: 1.
 <!-- menu:debut -->
 <nav class="lex-nav" aria-label="Sommaire du lexique">
 <div class="lex-groupe"><p class="lex-cat">Le lexique conservé</p><ol>
-<li><a href="#verifier">Vérifier un mot</a></li>
 <li data-ajouts-lien><a href="#ajouts">Ajouts récents</a></li>
+<li><a href="#verifier">Vérifier un mot</a></li>
 <li><a href="#regles">Les règles</a></li>
 <li><a href="#recherche">Rechercher et filtrer</a></li>
 </ol></div>
@@ -422,13 +422,6 @@ h3 { font-size: 23px; font-weight: 500; letter-spacing: -.015em; line-height: 1.
 <p class="small">Exemple : « Facture ARTHUR ET FILS SARL » devient « Facture c5249dd ET 43e4298 SARL ». Cette page reprend mot pour mot les listes du moteur de la version en ligne.</p>
 </div>
 
-<section id="verifier" class="verif" aria-labelledby="verif-titre">
-<label id="verif-titre" for="verif-mot">Ce mot restera-t-il lisible ?</label>
-<input id="verif-mot" type="search" autocomplete="off" spellcheck="false" placeholder="Tapez un mot, un nom ou un libellé (ex. Pharmacie Petit)">
-<div class="verdicts" id="verdicts" aria-live="polite"></div>
-<p class="small">La vérification se fait dans votre navigateur : rien n'est envoyé. Elle suit les règles du moteur pour les mots ; les nombres, IBAN et téléphones suivent d'autres règles.</p>
-</section>
-
 <!-- ajouts:debut -->
 <section id="ajouts" class="encadre ajouts" data-ajouts>
 <h2>Ajouts <em>récents</em></h2>
@@ -438,6 +431,13 @@ h3 { font-size: 23px; font-weight: 500; letter-spacing: -.015em; line-height: 1.
 </ul>
 </section>
 <!-- ajouts:fin -->
+
+<section id="verifier" class="verif" aria-labelledby="verif-titre">
+<label id="verif-titre" for="verif-mot">Ce mot restera-t-il lisible ?</label>
+<input id="verif-mot" type="search" autocomplete="off" spellcheck="false" placeholder="Tapez un mot, un nom ou un libellé (ex. Pharmacie Petit)">
+<div class="verdicts" id="verdicts" aria-live="polite"></div>
+<p class="small">La vérification se fait dans votre navigateur : rien n'est envoyé. Elle suit les règles du moteur pour les mots ; les nombres, IBAN et téléphones suivent d'autres règles.</p>
+</section>
 
 <section id="regles">
 <h2>Les <em>règles</em></h2>
