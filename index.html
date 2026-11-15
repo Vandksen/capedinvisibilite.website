@@ -139,10 +139,10 @@ h3 { font-size: 23px; font-weight: 500; letter-spacing: -.015em; line-height: 1.
 }
 .site-header .wrap {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   align-items: center;
   justify-content: space-between;
-  gap: 14px 28px;
+  gap: 14px 20px;
   padding-block: 16px;
 }
 .logo {
@@ -164,20 +164,24 @@ h3 { font-size: 23px; font-weight: 500; letter-spacing: -.015em; line-height: 1.
   letter-spacing: .06em;
   vertical-align: 3px;
 }
-.site-nav { display: flex; flex-wrap: wrap; gap: 6px 24px; }
+/* Bureau : logo, menu et bouton sur une ligne ; si la place manque, le menu défile */
+.site-header .logo, .header-cta { flex: none; white-space: nowrap; }
+.site-nav { display: flex; flex: 0 1 auto; flex-wrap: nowrap; gap: 6px clamp(12px, 1.4vw, 16px); min-width: 0; overflow-x: auto; scrollbar-width: none; }
+.site-nav::-webkit-scrollbar { display: none; }
+.site-nav a { flex: none; white-space: nowrap; }
 .site-nav a {
   padding: 6px 0;
   color: var(--ink);
   font-family: var(--mono);
   font-size: 12px;
-  letter-spacing: .04em;
+  letter-spacing: .02em;
   text-decoration: none;
 }
 .site-nav a:hover { color: var(--blue); }
 
 @media (max-width: 760px) {
   html { scroll-padding-top: 104px; }
-  .site-header .wrap { padding-block: 10px; gap: 4px; }
+  .site-header .wrap { flex-wrap: wrap; padding-block: 10px; gap: 4px; }
   .logo { font-size: 15px; }
   .beta { margin-left: 3px; padding: 2px 4px; font-size: 9px; vertical-align: 2px; }
   .site-header .beta { display: table; margin: 3px 0 0; letter-spacing: 0; }

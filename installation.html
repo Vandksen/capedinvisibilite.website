@@ -136,10 +136,10 @@ h3 { font-size: 23px; font-weight: 500; letter-spacing: -.015em; line-height: 1.
 }
 .site-header .wrap {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   align-items: center;
   justify-content: space-between;
-  gap: 14px 28px;
+  gap: 14px 20px;
   padding-block: 16px;
 }
 .logo {
@@ -161,20 +161,24 @@ h3 { font-size: 23px; font-weight: 500; letter-spacing: -.015em; line-height: 1.
   letter-spacing: .06em;
   vertical-align: 3px;
 }
-.site-nav { display: flex; flex-wrap: wrap; gap: 6px 24px; }
+/* Bureau : logo, menu et bouton sur une ligne ; si la place manque, le menu défile */
+.site-header .logo, .header-cta { flex: none; white-space: nowrap; }
+.site-nav { display: flex; flex: 0 1 auto; flex-wrap: nowrap; gap: 6px clamp(12px, 1.4vw, 16px); min-width: 0; overflow-x: auto; scrollbar-width: none; }
+.site-nav::-webkit-scrollbar { display: none; }
+.site-nav a { flex: none; white-space: nowrap; }
 .site-nav a {
   padding: 6px 0;
   color: var(--ink);
   font-family: var(--mono);
   font-size: 12px;
-  letter-spacing: .04em;
+  letter-spacing: .02em;
   text-decoration: none;
 }
 .site-nav a:hover { color: var(--blue); }
 
 @media (max-width: 760px) {
   html { scroll-padding-top: 104px; }
-  .site-header .wrap { padding-block: 10px; gap: 4px; }
+  .site-header .wrap { flex-wrap: wrap; padding-block: 10px; gap: 4px; }
   .logo { font-size: 15px; }
   .beta { margin-left: 3px; padding: 2px 4px; font-size: 9px; vertical-align: 2px; }
   .site-header .beta { display: table; margin: 3px 0 0; letter-spacing: 0; }
@@ -337,18 +341,26 @@ code {
   .card { padding: 20px; }
 }
 
-/* Mobile : le menu quitte le bord gauche et s'affiche en entier en bas de page, avant le pied */
+/* Mobile : le menu garde ses numéros et devient une barre horizontale fixée en bas de l'écran */
 @media (max-width: 760px) {
   :root { --rail: 0px; }
-  body { display: flex; flex-direction: column; }
-  .steps-nav { order: 1; position: static; width: auto; margin: 0 16px 40px; padding: 10px; transform: none; border-radius: 10px; }
-  .site-footer { order: 2; }
-  .steps-nav a { justify-content: flex-start; width: auto; min-height: 44px; padding: 6px 10px; border-radius: 10px; }
-  .steps-cat { position: static; width: auto; height: auto; padding: 4px 10px 6px; overflow: visible; clip-path: none; white-space: normal; }
-  .steps-group + .steps-group { margin-top: 8px; padding-top: 8px; }
-  .steps-nav .label-text { position: static; width: auto; height: auto; overflow: visible; clip-path: none; white-space: normal; }
-  .steps-nav .n { background: var(--chip); }
-  .steps-nav a[aria-current="step"] .n { background: var(--on-blue); color: var(--blue); }
+  body { padding-bottom: 76px; }
+  .steps-nav {
+    top: auto;
+    bottom: 12px;
+    left: 50%;
+    display: flex;
+    align-items: center;
+    width: max-content;
+    max-width: calc(100% - 24px);
+    overflow-x: auto;
+    scrollbar-width: none;
+    transform: translateX(-50%);
+  }
+  .steps-nav::-webkit-scrollbar { display: none; }
+  .steps-group { flex: none; }
+  .steps-nav ol { flex-direction: row; }
+  .steps-group + .steps-group { margin: 0 0 0 3px; padding: 0 0 0 3px; border-top: 0; border-left: 1px solid var(--line); }
   .guide { padding-left: 16px; }
   .site-footer .wrap { padding-left: 16px; }
 }
