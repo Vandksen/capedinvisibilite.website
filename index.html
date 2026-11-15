@@ -419,6 +419,12 @@ details[open] summary span { transform: rotate(45deg); }
   }
 }
 
+/* Un dossier, une table */
+.use-card { display: flex; flex-direction: column; gap: 10px; padding: 22px 24px; color: var(--ink); }
+.use-card .row { font-size: 14px; }
+.use-text { color: var(--ink); }
+.use-answer { display: flex; flex-direction: column; gap: 12px; padding: 24px 28px; color: var(--ink); }
+
 /* Pied de page */
 .site-footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 20px 24px; padding-block: 36px; }
 .legal { display: flex; flex-wrap: wrap; gap: 8px 24px; font-family: var(--mono); font-size: 12px; color: var(--muted); }
@@ -598,13 +604,47 @@ details[open] summary span { transform: rotate(45deg); }
 </div>
 </section>
 
+<!-- Un dossier, une table -->
+<section id="dossier" class="section">
+<div class="wrap stack">
+<div class="how-head">
+<div class="section-title">
+<p class="eyebrow">Cas d'usage</p>
+<h2>Un dossier, <em>une table</em></h2>
+</div>
+<p class="small">Déposez ensemble le FEC, la balance et la note d'un même client : une seule table les couvre, et chaque tiers garde le même code dans les trois fichiers. L'IA peut donc les croiser.</p>
+</div>
+<div class="cards">
+<div class="panel use-card">
+<div class="compare-head"><span class="pill on">FEC</span><span class="note">.txt</span></div>
+<div class="row"><span>401 · Facture <span class="hl">c5249dd</span> ET <span class="hl">43e4298</span> SARL</span><span class="amount">1 200,00</span></div>
+<div class="row"><span>401 · Facture <span class="hl">c5249dd</span> ET <span class="hl">43e4298</span> SARL</span><span class="amount">2 450,00</span></div>
+</div>
+<div class="panel use-card">
+<div class="compare-head"><span class="pill on">Balance Excel</span><span class="note">.xlsx</span></div>
+<div class="row"><span>401 · <span class="hl">c5249dd</span> ET <span class="hl">43e4298</span></span><span class="amount">3 650,00</span></div>
+<div class="row"><span>401 · <span class="hl">9e01b7f</span> DISTRIBUTION</span><span class="amount">780,00</span></div>
+</div>
+<div class="panel use-card">
+<div class="compare-head"><span class="pill on">Note Word</span><span class="note">.docx</span></div>
+<p class="small use-text">« Litige en cours avec <span class="hl">c5249dd</span> ET <span class="hl">43e4298</span> sur la livraison de mars. »</p>
+</div>
+</div>
+<div class="panel use-answer">
+<div class="compare-head"><span class="pill">Réponse de l'IA</span><span class="note">avant rétablissement</span></div>
+<p>« Le fournisseur <span class="hl">c5249dd</span> ET <span class="hl">43e4298</span> représente 82 % du solde fournisseurs, et la note signale un litige : à provisionner ? »</p>
+<p class="small">Déposez la réponse avec la table : « c5249dd ET 43e4298 » redevient « ARTHUR ET FILS ». Exemple fictif.</p>
+</div>
+</div>
+</section>
+
 <!-- Sécurité -->
 <section id="securite" class="section blue">
 <div class="wrap split">
 <div class="security-intro">
 <p class="eyebrow">Sécurité</p>
 <h2>Rien ne sort<br><em>de l'application.</em></h2>
-<p class="small">Juridiquement, il s'agit de pseudonymisation (RGPD, art. 4.5) : la table de correspondance reste sous votre seul contrôle. Ce que vous transmettez ensuite à une IA, après relecture, relève de votre choix. Voir les <a href="mentions-legales.html#limites">limites de la pseudonymisation</a>.</p>
+<p class="small">Juridiquement, il s'agit de pseudonymisation (RGPD, art. 4.5) : la table de correspondance reste sous votre seul contrôle. Ce que vous transmettez ensuite à une IA, après relecture, relève de votre choix. Voir <a href="rgpd-secret-professionnel.html">RGPD et secret professionnel</a> et les <a href="mentions-legales.html#limites">limites de la pseudonymisation</a>.</p>
 </div>
 <ul class="checks">
 <li><span class="title">Aucune donnée transmise</span><span class="detail">traitement sur le poste</span></li>
@@ -673,6 +713,10 @@ details[open] summary span { transform: rotate(45deg); }
 <p class="small">Oui, grâce à la table de correspondance, qui reste sur votre poste et rétablit les valeurs d'origine dans la réponse de l'IA, une fois celle-ci enregistrée dans un fichier.</p>
 </details>
 <details>
+<summary>Nous avons déjà Copilot ou ChatGPT Enterprise : à quoi bon ?<span aria-hidden="true">+</span></summary>
+<p class="small">Le contrat de votre IA encadre ce que le prestataire fait de vos données ; il ne réduit pas ce que vous lui confiez. La pseudonymisation complète ce contrat : les noms et les coordonnées détectés sont remplacés par des codes avant l'envoi (minimisation des données), et vous révélez moins d'informations couvertes par le secret professionnel. Elle ne remplace ni le contrat ni votre relecture. <a href="rgpd-secret-professionnel.html#copilot">En savoir plus</a>.</p>
+</details>
+<details>
 <summary>La pseudonymisation est-elle infaillible ?<span aria-hidden="true">+</span></summary>
 <p class="small">Non. Elle repère les noms, numéros et coordonnées de façon automatique : un élément inhabituel peut lui échapper. Relisez toujours le fichier pseudonymisé avant de l'envoyer ; vous restez responsable des données que vous transmettez. Voir les <a href="mentions-legales.html#limites">limites de la pseudonymisation</a>.</p>
 </details>
@@ -705,6 +749,8 @@ details[open] summary span { transform: rotate(45deg); }
 <nav class="legal" aria-label="Liens légaux">
 <a href="mentions-legales.html">Mentions légales</a>
 <a href="mentions-legales.html#donnees">Politique de confidentialité</a>
+<a href="rgpd-secret-professionnel.html">RGPD et secret professionnel</a>
+<a href="lexique.html">Lexique conservé</a>
 <button type="button" class="lien-cookies" data-gerer-cookies>Gérer les cookies</button>
 <span class="projet">Un projet <a href="https://structurre.fr" target="_blank" rel="noopener"><img src="assets/structurre.svg" alt="" width="20" height="20">STRUCTURRE</a></span>
 </nav>
