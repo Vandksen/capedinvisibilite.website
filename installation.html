@@ -251,7 +251,7 @@ h3 { font-size: 23px; font-weight: 500; letter-spacing: -.015em; line-height: 1.
 .guide-hero { display: flex; flex-direction: column; align-items: flex-start; gap: 24px; padding-block: clamp(56px, 8vw, 96px) 24px; }
 .guide-hero .lead { max-width: 620px; font-size: 19px; }
 
-/* Menu fixe, centré verticalement */
+/* Menu fixe, ancré sous l'en-tête (voir plus bas) */
 .steps-nav {
   position: fixed;
   z-index: 50;
@@ -264,6 +264,10 @@ h3 { font-size: 23px; font-weight: 500; letter-spacing: -.015em; line-height: 1.
   border-radius: 10px;
   background: var(--paper);
   box-shadow: 0 30px 60px -30px rgba(17, 54, 219, .32), 0 2px 10px rgba(27, 36, 80, .06);
+}
+/* Menu ancré sous l'en-tête (au-delà du mobile) ; --menu-haut est tenu à jour par le script du menu */
+@media (min-width: 761px) {
+  .steps-nav { top: var(--menu-haut, 102px); transform: none; max-height: calc(100vh - var(--menu-haut, 102px) - 20px); overflow-y: auto; }
 }
 .steps-nav ol { display: flex; flex-direction: column; gap: 2px; }
 .steps-group + .steps-group { margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--line); }
@@ -678,6 +682,21 @@ code {
 </footer>
 
 <script>
+// Menu ancré 20 px sous l'en-tête, même quand le bandeau de consentement le pousse vers le bas
+(() => {
+  const entete = document.querySelector(".site-header");
+  if (!entete) return;
+  const placer = () => {
+    const bas = Math.max(0, entete.getBoundingClientRect().bottom);
+    document.documentElement.style.setProperty("--menu-haut", Math.round(bas + 20) + "px");
+  };
+  addEventListener("scroll", placer, { passive: true });
+  addEventListener("load", placer);
+  addEventListener("resize", placer);
+  new MutationObserver(placer).observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ["hidden", "class"] });
+  placer();
+})();
+
 // Met en évidence, dans le menu, l'étape en cours de lecture.
 (() => {
   const links = [...document.querySelectorAll('.steps-nav a[href^="#"]')];
