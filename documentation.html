@@ -304,6 +304,10 @@ h3 { font-size: 23px; font-weight: 500; letter-spacing: -.015em; line-height: 1.
 .card ul li::marker { color: var(--blue); }
 .pill { align-self: flex-start; }
 .card .btn { align-self: flex-start; }
+/* Goodies : aperçu des stickers, coins arrondis comme la découpe */
+.goodie img { display: block; width: 100%; height: auto; border-radius: 8px; box-shadow: 0 14px 30px -18px rgba(17, 54, 219, .45), 0 1px 3px rgba(27, 36, 80, .12); }
+.goodie-liens { display: flex; flex-wrap: wrap; gap: 8px; }
+.goodie-liens .btn { align-self: auto; }
 .card .small { margin-top: -8px; }
 code {
   padding: 1px 6px;
@@ -402,6 +406,12 @@ code {
 <ol>
 <li><a href="#masque"><span class="n">6</span><span class="label-text">Ce qui est masqué</span></a></li>
 <li><a href="#mise-a-jour"><span class="n">7</span><span class="label-text">Mise à jour régulière</span></a></li>
+</ol>
+</div>
+<div class="steps-group">
+<p class="steps-cat">Goodies</p>
+<ol>
+<li><a href="#goodies"><span class="n">8</span><span class="label-text">Stickers</span></a></li>
 </ol>
 </div>
 <div class="steps-group">
@@ -574,6 +584,55 @@ code {
 <li><strong>Pour mettre à jour</strong>, reprenez les étapes <a href="installation.html#etape-2">2</a> et <a href="installation.html#etape-3">3</a> du guide d'installation.</li>
 </ul>
 </div>
+</section>
+
+<section class="step" id="goodies">
+<div class="step-head">
+<span class="step-num" aria-hidden="true">8</span>
+<div class="step-title">
+<p class="eyebrow">Goodies</p>
+<h2>Les <em>stickers</em></h2>
+<p class="step-why">Deux stickers à coller sur votre ordinateur ou à offrir, en crème ou en bleu. Les fichiers sont prêts pour l'imprimeur.</p>
+</div>
+</div>
+<div class="os">
+<div class="panel card goodie">
+<span class="pill">Crème</span>
+<img src="assets/goodies/sticker-creme.svg" alt="Sticker crème : CAPE D'INVISIBILITÉ, Revêtez la cape sur www.capedinvisibilite.fr" width="449" height="138" loading="lazy">
+<div class="goodie-liens">
+<a class="btn" href="assets/goodies/sticker-creme-impression.pdf" download>PDF pour l'imprimeur</a>
+<a class="btn ghost" href="assets/goodies/sticker-creme-impression.png" download>PNG</a>
+</div>
+</div>
+<div class="panel card goodie">
+<span class="pill on">Bleu</span>
+<img src="assets/goodies/sticker-bleu.svg" alt="Sticker bleu : CAPE D'INVISIBILITÉ, Revêtez la cape sur www.capedinvisibilite.fr" width="449" height="138" loading="lazy">
+<div class="goodie-liens">
+<a class="btn" href="assets/goodies/sticker-bleu-impression.pdf" download>PDF pour l'imprimeur</a>
+<a class="btn ghost" href="assets/goodies/sticker-bleu-impression.png" download>PNG</a>
+</div>
+</div>
+</div>
+<div class="os">
+<div class="panel card">
+<span class="pill on">Chez un imprimeur</span>
+<ol>
+<li>Choisissez un imprimeur de stickers en ligne, en <strong>sticker découpé à la forme</strong> (découpe à la forme ou « contour »), sur vinyle mat ou brillant.</li>
+<li>Envoyez le <strong>PDF pour l'imprimeur</strong> : il est vectoriel, donc net à toutes les tailles.</li>
+<li>Indiquez une largeur de <strong>9 cm</strong> environ (le sticker fait alors 9 × 2,8 cm).</li>
+<li>Précisez que le <strong>trait magenta</strong> est le trait de découpe (CutContour), à ne pas imprimer. Le fond perdu est déjà prévu.</li>
+</ol>
+</div>
+<div class="panel card">
+<span class="pill on">À la maison</span>
+<ol>
+<li>Téléchargez le <strong>PNG</strong> et ouvrez-le avec l'aperçu de votre ordinateur.</li>
+<li>Imprimez-le sur une <strong>feuille autocollante A4</strong>, à 9,3 cm de large, sans « ajuster à la page ».</li>
+<li>Découpez aux ciseaux ou au cutter <strong>le long du trait rose</strong> : il guide la découpe.</li>
+</ol>
+</div>
+</div>
+<div class="callout see"><span class="label mono">Vous devez voir</span><span>Un sticker aux coins arrondis, sans trait rose : le trait de découpe disparaît avec la découpe.</span></div>
 </section>
 
 <!-- Journal des mises à jour : toutes les versions, la plus récente en premier -->
