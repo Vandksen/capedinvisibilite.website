@@ -230,6 +230,8 @@ h3 { font-size: 23px; font-weight: 500; letter-spacing: -.015em; line-height: 1.
 .duo h3 { margin: 0; color: var(--blue); }
 
 /* Lexique */
+.retour { align-self: flex-start; font-family: var(--mono); font-size: 13px; text-decoration: none; }
+.retour:hover { text-decoration: underline; }
 .compte { font-family: var(--mono); font-size: 13px; color: var(--muted); }
 .compte strong { color: var(--blue); font-size: 15px; }
 .verif { display: flex; flex-direction: column; gap: 12px; padding: 24px 26px; border: 1px solid var(--line); border-radius: 6px; background: var(--paper); }
@@ -276,6 +278,7 @@ h3 { font-size: 23px; font-weight: 500; letter-spacing: -.015em; line-height: 1.
 
 <main class="content-page">
 <div class="intro">
+<a class="retour" href="documentation.html">← Retour à la documentation</a>
 <p class="eyebrow">Transparence · généré depuis le moteur</p>
 <h1>Le lexique <em>conservé</em></h1>
 <p class="lead">Cape d'invisibilité remplace par un code chaque mot qu'elle ne connaît pas. Les mots de ce lexique, eux, restent lisibles : l'IA doit comprendre qu'il s'agit d'une facture, d'un virement ou d'une SARL.</p>
@@ -297,6 +300,7 @@ h3 { font-size: 23px; font-weight: 500; letter-spacing: -.015em; line-height: 1.
 <li>Les mots d'une seule lettre restent lisibles (« M », « à »).</li>
 <li>Les montants, les dates et les numéros de compte ne passent pas par ce lexique : ils sont conservés.</li>
 </ul>
+<p class="small">Pour savoir ce que l'application remplace et ce qu'elle conserve (noms, numéros, montants, dates), voir <a href="documentation.html#masque">Ce qui est masqué</a> dans la documentation.</p>
 <div class="encadre">
 <p><strong>Un nom fait de mots du lexique reste lisible.</strong> « Grand Hôtel » reste lisible en entier, « Pharmacie du Centre » en partie, un client nommé Petit ou Blanc aussi : ces mots sont du vocabulaire courant ou comptable, donc conservés. Testez le nom dans le champ ci-dessus. Relisez le fichier pseudonymisé avant de l'envoyer. Voir les <a href="mentions-legales.html#limites">limites de la pseudonymisation</a>.</p>
 </div>
