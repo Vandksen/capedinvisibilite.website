@@ -250,25 +250,32 @@ h3 { font-size: 23px; font-weight: 500; letter-spacing: -.015em; line-height: 1.
 .mots { display: flex; flex-wrap: wrap; gap: 6px; }
 .mots li { padding: 2px 9px; border-radius: 4px; background: var(--chip); font-family: var(--mono); font-size: 13px; line-height: 1.6; }
 
-/* Lexique : menu à gauche */
+/* Lexique : menu à gauche, en accordéon comme la documentation */
 .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .lex-page { display: grid; grid-template-columns: 248px minmax(0, 1fr); gap: clamp(32px, 4vw, 56px); max-width: 1200px; margin: 0 auto; padding: 0 24px; }
 .lex-main { max-width: 860px; margin: 0; padding-inline: 0; }
 .lex-aside { position: sticky; top: var(--menu-haut, 88px); align-self: start; margin-top: clamp(56px, 8vw, 96px); max-height: calc(100vh - var(--menu-haut, 88px) - 20px); overflow-y: auto; scrollbar-width: thin; }
 .lex-nav { padding: 10px; border: 2px solid var(--blue); border-radius: 10px; background: var(--paper); box-shadow: 0 30px 60px -30px rgba(17, 54, 219, .32), 0 2px 10px rgba(27, 36, 80, .06); }
 .lex-nav ol { display: flex; flex-direction: column; gap: 1px; }
-.lex-cat { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin: 8px 0 2px; padding: 8px 10px 4px; border-top: 1px solid var(--line); color: var(--blue); font-family: var(--mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; }
-.lex-cat.titre { margin-top: 0; border-top: 0; }
-.lex-cat a { padding: 0; color: inherit; text-decoration: none; }
-.lex-cat a:hover { text-decoration: underline; }
+.lex-groupe + .lex-groupe { margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--line); }
+.lex-cat { display: flex; align-items: center; gap: 8px; margin: 0; padding: 4px 10px 6px; border-radius: 8px; color: var(--blue); font-family: var(--mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; }
+.lex-cat .nb { margin-left: auto; }
+.lex-nav.soufflet .lex-cat { cursor: pointer; user-select: none; }
+.lex-nav.soufflet .lex-cat:hover { background: rgba(17, 54, 219, .08); }
+.lex-nav.soufflet .lex-cat:focus-visible { outline: 2px solid var(--blue); outline-offset: 1px; }
+.lex-cat .fleche { display: none; flex: none; transition: transform .2s ease; }
+.lex-nav.soufflet .lex-cat .fleche { display: block; }
+.lex-nav.soufflet .replie .fleche { transform: rotate(-90deg); }
+.lex-nav.soufflet .replie .sous, .lex-nav.soufflet .replie ol { display: none; }
+.lex-nav.soufflet .replie .lex-cat { padding-bottom: 4px; }
+@media (prefers-reduced-motion: reduce) { .lex-cat .fleche { transition: none; } }
+.seul-mobile { display: none; }
 .lex-nav ol a { display: block; padding: 6px 10px; border-radius: 8px; color: var(--ink); font-size: 14px; line-height: 1.3; text-decoration: none; }
 .lex-nav ol a:hover { background: rgba(17, 54, 219, .08); color: var(--blue); }
 .lex-nav a[aria-current="true"] { background: var(--blue); color: var(--on-blue); }
-.lex-cat a[aria-current="true"] { background: none; color: var(--blue); text-decoration: underline; }
 .lex-lettres { display: grid; grid-template-columns: repeat(6, 1fr); gap: 3px; padding: 4px 6px 2px; }
 .lex-lettres a { display: grid; place-items: center; height: 28px; border-radius: 6px; color: var(--ink); font-family: var(--mono); font-size: 12px; text-decoration: none; }
 .lex-lettres a:hover { background: rgba(17, 54, 219, .08); color: var(--blue); }
-.lex-lettres a[aria-current="true"] { background: var(--blue); color: var(--on-blue); }
 
 /* Recherche et filtres */
 .recherche input { width: 100%; min-height: 48px; padding: 0 16px; border: 1px solid var(--line); border-radius: 6px; background: #fff; color: var(--ink); font: 400 17px var(--sans); }
@@ -288,11 +295,11 @@ h3 { font-size: 23px; font-weight: 500; letter-spacing: -.015em; line-height: 1.
   .lex-aside { z-index: 40; margin: 0; max-height: none; overflow: visible; }
   .lex-nav { display: flex; align-items: center; gap: 4px; padding: 6px 16px; overflow-x: auto; border: 0; border-bottom: 1px solid var(--line); border-radius: 0; box-shadow: none; scrollbar-width: none; }
   .lex-nav::-webkit-scrollbar { display: none; }
+  .lex-groupe, .lex-groupe + .lex-groupe { display: flex; flex: none; margin: 0; padding: 0; border: 0; }
   .lex-nav ol { flex-direction: row; flex: none; }
-  .lex-nav .sous, .lex-cat .nb, .lex-cat.titre { display: none; }
-  .lex-cat { flex: none; margin: 0; padding: 0; border: 0; text-transform: none; letter-spacing: 0; font-family: var(--sans); font-size: 14px; }
-  .lex-cat a, .lex-nav ol a { padding: 6px 10px; border-radius: 8px; color: var(--ink); white-space: nowrap; font-size: 14px; }
-  .lex-cat a[aria-current="true"] { background: var(--blue); color: var(--on-blue); text-decoration: none; }
+  .lex-nav .sous, .lex-cat { display: none; }
+  .lex-nav a.seul-mobile { display: block; }
+  .lex-nav a { padding: 6px 10px; border-radius: 8px; color: var(--ink); white-space: nowrap; font-size: 14px; text-decoration: none; }
 }
 </style>
 <link rel="stylesheet" href="assets/consentement.css">
@@ -322,12 +329,12 @@ h3 { font-size: 23px; font-weight: 500; letter-spacing: -.015em; line-height: 1.
 <aside class="lex-aside">
 <!-- menu:debut -->
 <nav class="lex-nav" aria-label="Sommaire du lexique">
-<p class="lex-cat titre">Le lexique</p><ol>
+<div class="lex-groupe"><p class="lex-cat">Le lexique conservé</p><ol>
 <li><a href="#verifier">Vérifier un mot</a></li>
 <li><a href="#regles">Les règles</a></li>
 <li><a href="#recherche">Rechercher et filtrer</a></li>
-</ol>
-<p class="lex-cat"><a href="#courant">Vocabulaire courant</a> <span class="nb">275</span></p><ol class="sous">
+</ol></div>
+<div class="lex-groupe"><p class="lex-cat">Vocabulaire courant <span class="nb">275</span></p><a class="seul-mobile" href="#courant">Vocabulaire courant</a><ol class="sous">
 <li><a href="#courant-formes-sociales-et-statuts">Formes sociales et statuts</a></li>
 <li><a href="#courant-journaux-a-nouveaux-operations">Journaux, à-nouveaux, opérations</a></li>
 <li><a href="#courant-banque-et-reglements">Banque et règlements</a></li>
@@ -338,9 +345,8 @@ h3 { font-size: 23px; font-weight: 500; letter-spacing: -.015em; line-height: 1.
 <li><a href="#courant-mois-et-jours">Mois et jours</a></li>
 <li><a href="#courant-intitules-de-colonnes-et-de-rubriques">Intitulés de colonnes et de rubriques</a></li>
 <li><a href="#courant-codes-pays-des-iban-et-des-numeros-de-tva">Codes pays des IBAN et des numéros de TVA</a></li>
-</ol>
-<p class="lex-cat"><a href="#pcg">Vocabulaire du PCG</a> <span class="nb">3 720</span></p>
-<div class="lex-lettres sous">
+</ol></div>
+<div class="lex-groupe"><p class="lex-cat">Vocabulaire du PCG <span class="nb">3 720</span></p><a class="seul-mobile" href="#pcg">Vocabulaire du PCG</a><div class="lex-lettres sous">
 <a href="#pcg-a">A</a>
 <a href="#pcg-b">B</a>
 <a href="#pcg-c">C</a>
@@ -367,8 +373,8 @@ h3 { font-size: 23px; font-weight: 500; letter-spacing: -.015em; line-height: 1.
 <a href="#pcg-x">X</a>
 <a href="#pcg-z">Z</a>
 <a href="#pcg-œ">Œ</a>
-</div>
-<p class="lex-cat"><a href="#proposer">Proposer un mot</a></p>
+</div></div>
+<div class="lex-groupe"><ol><li><a href="#proposer">Proposer un mot</a></li></ol></div>
 </nav>
 <!-- menu:fin -->
 </aside>
@@ -705,6 +711,79 @@ h3 { font-size: 23px; font-weight: 500; letter-spacing: -.015em; line-height: 1.
   addEventListener("scroll", majour, { passive: true });
   addEventListener("resize", majour);
   majour();
+})();
+
+// Accordéon (grand écran, comme la documentation) : chaque catégorie se replie. Restent ouvertes
+// celle de la partie en cours, celle que survole la souris, et celles ouvertes d'un clic.
+(() => {
+  const nav = document.querySelector(".lex-nav");
+  if (!nav) return;
+  const groupes = [...nav.querySelectorAll(".lex-groupe")].filter((g) => g.querySelector(".lex-cat"));
+  const fleche = '<svg class="fleche" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>';
+  let actif = null, survole = null, sortie = null;
+  const ouverts = new Set(), fermes = new Set();
+  const enService = () => nav.classList.contains("soufflet");
+  const estOuvert = (g) => g === survole || ouverts.has(g) || (g === actif && !fermes.has(g));
+  function afficher() {
+    if (!enService()) return;
+    groupes.forEach((g) => {
+      const ouvert = estOuvert(g);
+      g.classList.toggle("replie", !ouvert);
+      g.querySelector(".lex-cat").setAttribute("aria-expanded", String(ouvert));
+    });
+  }
+  groupes.forEach((g) => {
+    const titre = g.querySelector(".lex-cat");
+    titre.insertAdjacentHTML("beforeend", fleche);
+    const basculer = () => {
+      if (!enService()) return;
+      const parSurvolSeul = survole === g && !ouverts.has(g) && !(g === actif && !fermes.has(g));
+      if (parSurvolSeul) ouverts.add(g);
+      else if (estOuvert(g)) { ouverts.delete(g); fermes.add(g); if (survole === g) survole = null; }
+      else { fermes.delete(g); ouverts.add(g); }
+      afficher();
+    };
+    titre.addEventListener("click", basculer);
+    titre.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); basculer(); }
+    });
+    g.addEventListener("mouseenter", () => {
+      if (!enService() || fermes.has(g)) return;
+      survole = g;
+      afficher();
+    });
+  });
+  nav.addEventListener("mouseenter", () => clearTimeout(sortie));
+  nav.addEventListener("mouseleave", () => {
+    clearTimeout(sortie);
+    sortie = setTimeout(() => { survole = null; afficher(); }, 300);
+  });
+  const groupeCourant = () => {
+    const lien = nav.querySelector('a[aria-current="true"]');
+    return lien ? lien.closest(".lex-groupe") : null;
+  };
+  function placer() {
+    nav.classList.remove("soufflet");
+    groupes.forEach((g) => g.classList.remove("replie"));
+    const grand = innerWidth > 900;
+    groupes.forEach((g) => {
+      const titre = g.querySelector(".lex-cat");
+      if (grand) { titre.setAttribute("role", "button"); titre.tabIndex = 0; }
+      else { titre.removeAttribute("role"); titre.removeAttribute("tabindex"); titre.removeAttribute("aria-expanded"); }
+    });
+    ouverts.clear(); fermes.clear(); survole = null;
+    if (!grand) { actif = null; return; }
+    nav.classList.add("soufflet");
+    actif = groupeCourant() || groupes[0];
+    afficher();
+  }
+  addEventListener("scroll", () => {
+    if (!enService()) return;
+    const courant = groupeCourant() || groupes[0];
+    if (courant !== actif) { actif = courant; ouverts.clear(); fermes.clear(); afficher(); }
+  }, { passive: true });
+  addEventListener("resize", placer);
+  placer();
 })();
 
 // Menu ancré sous l'en-tête, même quand le bandeau de consentement le pousse vers le bas.
