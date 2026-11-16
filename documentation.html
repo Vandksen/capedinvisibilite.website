@@ -595,31 +595,47 @@ code {
 <div class="step-title">
 <p class="eyebrow">Bon à savoir</p>
 <h2>Ce qui <em>est masqué</em></h2>
-<p class="step-why">L'application masque les noms et les numéros qui identifient une personne ou une société. Elle ne voit pas tout : relisez toujours le fichier avant l'envoi.</p>
+<p class="step-why">L'application ne devine pas ce qui est sensible. Elle garde lisibles les mots qu'elle connaît et remplace tous les autres par un code, ainsi que les numéros longs. Dans le doute, un mot est masqué.</p>
 </div>
 </div>
 <div class="os">
 <div class="panel card">
-<span class="pill on">Masqué</span>
+<span class="pill on">Dans un FEC</span>
 <ul>
-<li>Noms de personnes et de sociétés.</li>
-<li>SIREN, numéros de TVA, IBAN, cartes bancaires et téléphones, même écrits avec des espaces ou des tirets.</li>
-<li>Comptes nominatifs et colonnes non standard d'un FEC.</li>
-<li>Dans un FEC, le nom de chaque tiers, même fait de mots du vocabulaire comptable (« PETIT », « BLANC ») : il est alors masqué dans tout le fichier.</li>
-<li>Graphiques, objets intégrés et nom du fichier dans Word et Excel.</li>
+<li>Restent lisibles : les mots du vocabulaire comptable (« facture », « loyer », « banque »).</li>
+<li>Le nom de chaque tiers est masqué en entier. Un prénom ou un nom de famille qui s'y trouve (« PETIT », « BLANC ») est alors masqué dans tout le fichier.</li>
+<li>Les comptes nominatifs et les colonnes non standard sont masqués aussi.</li>
+<li>Limite : un mot comptable qui désigne un client dans un libellé peut rester lisible.</li>
 </ul>
 </div>
 <div class="panel card">
-<span class="pill on">Non masqué</span>
+<span class="pill on">Dans Word et Excel</span>
 <ul>
-<li>Les montants et les dates.</li>
-<li>Les mots courants du vocabulaire comptable, même quand ils servent de nom propre (« PETIT », « BLANC »), sauf dans un FEC quand ce nom est celui d'un tiers.</li>
-<li>Dans Word et Excel, les mots courants du français écrits en minuscules ou en début de phrase. Les prénoms et les noms de famille courants (« Pierre », « Boulanger ») sont masqués dès qu'ils portent une majuscule ; un nom rare qui est aussi un mot courant peut rester lisible en début de phrase.</li>
-<li>Le texte visible dans une image (capture, scan, signature) : cochez « Retirer les images » si besoin.</li>
+<li>Restent lisibles : les mots du vocabulaire comptable et les mots courants du français. Le texte reste compréhensible pour l'IA.</li>
+<li>Un mot courant est masqué quand sa majuscule peut désigner un nom : prénom ou nom de famille (« Pierre », « Boulanger »), mot en capitales, majuscule en milieu de phrase ou dans un titre.</li>
+<li>Les graphiques, les objets intégrés et le nom du fichier sont masqués aussi.</li>
+<li>Limite : un nom rare qui est aussi un mot courant peut rester lisible en début de phrase.</li>
 </ul>
 </div>
 </div>
-<div class="callout warn"><span class="label mono">Excel</span><span>Les tableaux croisés dynamiques et les liaisons vers d'autres classeurs sont retirés du classeur pseudonymisé, car leurs données d'origine y restaient en clair. Les valeurs affichées restent dans les cellules, pseudonymisées. Sans « Figer les valeurs », une IA qui lit le classeur sans le recalculer peut voir des totaux vides.</span></div>
+<div class="os">
+<div class="panel card">
+<span class="pill on">Toujours masqué</span>
+<ul>
+<li>Les noms inconnus de l'application : personnes, sociétés, sigles.</li>
+<li>SIREN, numéros de TVA, IBAN, cartes bancaires et téléphones, même écrits avec des espaces ou des tirets.</li>
+</ul>
+</div>
+<div class="panel card">
+<span class="pill on">Jamais masqué</span>
+<ul>
+<li>Les montants et les dates.</li>
+<li>Le texte visible dans une image (capture, scan, signature) : cochez « Retirer les images » si besoin.</li>
+</ul>
+</div>
+</div>
+<div class="callout see"><span class="label mono">Relecture</span><span>L'application ne voit pas tout : relisez toujours le fichier avant l'envoi.</span></div>
+<div class="callout warn"><span class="label mono">Excel</span><span>Les tableaux croisés dynamiques et les liaisons vers d'autres classeurs sont retirés du classeur pseudonymisé, car leurs données d'origine y restaient en clair. Les valeurs affichées restent dans les cellules, pseudonymisées. Sans « Figer les valeurs », une IA qui lit le classeur sans le recalculer peut voir des totaux vides.</span></div>
 </section>
 
 <section class="step" id="mise-a-jour">
