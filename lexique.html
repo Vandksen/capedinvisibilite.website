@@ -298,15 +298,6 @@ h3 { font-size: 23px; font-weight: 500; letter-spacing: -.015em; line-height: 1.
 .legende-ajout { font-size: 14px; color: var(--muted); }
 .legende-ajout::before { content: ""; display: inline-block; width: 6px; height: 6px; margin: 0 6px 1px 0; border-radius: 50%; background: var(--blue); vertical-align: middle; }
 
-/* Ajouts récents */
-.ajouts { display: flex; flex-direction: column; gap: 10px; scroll-margin-top: 88px; }
-.ajouts h2 { font-size: clamp(24px, 2.6vw, 30px); }
-.ajouts-liste { display: flex; flex-direction: column; }
-.ajouts-liste li { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 8px 0; border-top: 1px solid var(--line); }
-.ajouts-liste li:first-child { border-top: 0; }
-.ajouts-liste .mot { font-family: var(--mono); font-size: 14px; }
-.ajouts-liste time { color: var(--muted); font-size: 14px; white-space: nowrap; }
-.ajouts-liste li[hidden], .ajouts[hidden], [data-ajouts-lien][hidden] { display: none; }
 
 /* Recherche et filtres */
 .recherche input { width: 100%; min-height: 48px; padding: 0 16px; border: 1px solid var(--line); border-radius: 6px; background: #fff; color: var(--ink); font: 400 17px var(--sans); }
@@ -364,7 +355,6 @@ h3 { font-size: 23px; font-weight: 500; letter-spacing: -.015em; line-height: 1.
 <!-- menu:debut -->
 <nav class="lex-nav" aria-label="Sommaire du lexique">
 <div class="lex-groupe"><p class="lex-cat">Le lexique conservé</p><ol>
-<li data-ajouts-lien><a href="#ajouts">Ajouts récents</a></li>
 <li><a href="#verifier">Vérifier un mot</a></li>
 <li><a href="#regles">Les règles</a></li>
 <li><a href="#recherche">Rechercher et filtrer</a></li>
@@ -422,26 +412,6 @@ h3 { font-size: 23px; font-weight: 500; letter-spacing: -.015em; line-height: 1.
 <p class="lead">Cape d'invisibilité remplace par un code chaque mot qu'elle ne connaît pas. Les mots de ce lexique, eux, restent lisibles : l'IA doit comprendre qu'il s'agit d'une facture, d'un virement ou d'une SARL. Dans un Word ou un Excel, les mots courants du français restent lisibles en plus (voir <a href="documentation.html#masque">Ce qui est masqué</a>).</p>
 <p class="small">Exemple : « Facture ARTHUR ET FILS SARL » devient « Facture c5249dd ET 43e4298 SARL ». Cette page reprend mot pour mot les listes du moteur de la version en ligne.</p>
 </div>
-
-<!-- ajouts:debut -->
-<section id="ajouts" class="encadre ajouts" data-ajouts>
-<h2>Ajouts <em>récents</em></h2>
-<p class="small">Les mots ajoutés au lexique ces six derniers mois : ils restent désormais lisibles.</p>
-<ul class="ajouts-liste">
-<li data-date="2026-11-15"><span class="mot">statut</span><time datetime="2026-11-15">15 novembre 2026</time></li>
-<li data-date="2026-11-15"><span class="mot">soussigne</span><time datetime="2026-11-15">15 novembre 2026</time></li>
-<li data-date="2026-11-15"><span class="mot">restreint</span><time datetime="2026-11-15">15 novembre 2026</time></li>
-<li data-date="2026-11-15"><span class="mot">reduite</span><time datetime="2026-11-15">15 novembre 2026</time></li>
-<li data-date="2026-11-15"><span class="mot">metier</span><time datetime="2026-11-15">15 novembre 2026</time></li>
-<li data-date="2026-11-15"><span class="mot">mariage</span><time datetime="2026-11-15">15 novembre 2026</time></li>
-<li data-date="2026-11-15"><span class="mot">edition</span><time datetime="2026-11-15">15 novembre 2026</time></li>
-<li data-date="2026-11-15"><span class="mot">communaute</span><time datetime="2026-11-15">15 novembre 2026</time></li>
-<li data-date="2026-11-15"><span class="mot">cercle</span><time datetime="2026-11-15">15 novembre 2026</time></li>
-<li data-date="2026-11-15"><span class="mot">animation</span><time datetime="2026-11-15">15 novembre 2026</time></li>
-<li data-date="2026-11-15"><span class="mot">acquet</span><time datetime="2026-11-15">15 novembre 2026</time></li>
-</ul>
-</section>
-<!-- ajouts:fin -->
 
 <section id="verifier" class="verif" aria-labelledby="verif-titre">
 <label id="verif-titre" for="verif-mot">Ce mot restera-t-il lisible ?</label>
@@ -748,23 +718,6 @@ h3 { font-size: 23px; font-weight: 500; letter-spacing: -.015em; line-height: 1.
       filtrer();
     });
   }
-})();
-
-// Ajouts récents : seuls les mots ajoutés ces six derniers mois restent affichés.
-(() => {
-  const encart = document.querySelector("[data-ajouts]");
-  if (!encart) return;
-  const limite = new Date();
-  limite.setMonth(limite.getMonth() - 6);
-  const seuil = limite.toISOString().slice(0, 10);
-  let n = 0;
-  for (const li of encart.querySelectorAll("li[data-date]")) {
-    li.hidden = li.dataset.date < seuil;
-    if (!li.hidden) n++;
-  }
-  encart.hidden = n === 0;
-  const lien = document.querySelector("[data-ajouts-lien]");
-  if (lien) lien.hidden = n === 0;
 })();
 
 // Menu : met en évidence la partie en cours de lecture.
