@@ -370,42 +370,13 @@ code {
 .guide-end h2 { font-size: clamp(30px, 3.4vw, 42px); }
 .site-footer .wrap { padding-left: calc(24px + var(--rail)); }
 
+/* Écran étroit : le menu est retiré, le contenu prend toute la largeur */
 @media (max-width: 1040px) {
-  :root { --rail: 44px; }
-  .steps-nav { left: 8px; width: 44px; padding: 3px; border-radius: 9999px; }
-  .steps-nav a { justify-content: center; width: 36px; min-height: 36px; padding: 0; border-radius: 9999px; }
-  .steps-cat { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
-  .steps-group + .steps-group { margin-top: 3px; padding-top: 3px; }
-  .steps-nav .label-text { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
-  .steps-nav .n { background: transparent; }
-  .steps-nav a[aria-current="step"] .n { background: transparent; color: var(--on-blue); }
-  .guide { padding-right: 16px; padding-left: 64px; }
-  .site-footer .wrap { padding-left: 64px; }
-  .card { padding: 20px; }
-}
-
-/* Mobile : le menu garde ses numéros et devient une barre horizontale fixée en bas de l'écran */
-@media (max-width: 760px) {
   :root { --rail: 0px; }
-  body { padding-bottom: 76px; }
-  .steps-nav {
-    top: auto;
-    bottom: 12px;
-    left: 50%;
-    display: flex;
-    align-items: center;
-    width: max-content;
-    max-width: calc(100% - 24px);
-    overflow-x: auto;
-    scrollbar-width: none;
-    transform: translateX(-50%);
-  }
-  .steps-nav::-webkit-scrollbar { display: none; }
-  .steps-group { flex: none; }
-  .steps-nav ol { flex-direction: row; }
-  .steps-group + .steps-group { margin: 0 0 0 3px; padding: 0 0 0 3px; border-top: 0; border-left: 1px solid var(--line); }
-  .guide { padding-left: 16px; }
+  .steps-nav { display: none; }
+  .guide { padding-right: 16px; padding-left: 16px; }
   .site-footer .wrap { padding-left: 16px; }
+  .card { padding: 20px; }
 }
 </style>
 <link rel="stylesheet" href="assets/consentement.css">

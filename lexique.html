@@ -311,20 +311,11 @@ h3 { font-size: 23px; font-weight: 500; letter-spacing: -.015em; line-height: 1.
 .resultat { font-family: var(--mono); font-size: 13px; color: var(--muted); }
 .mots li[hidden], .rubrique[hidden], [data-section][hidden] { display: none; }
 
-/* Mobile : comme la documentation, le menu devient une barre fixée en bas de l'écran */
+/* Écran étroit : le menu est retiré, le contenu prend toute la largeur */
 @media (max-width: 900px) {
-  body { padding-bottom: 76px; }
   .lex-page { padding: 0; }
   .lex-main { padding-inline: 16px; }
-  .lex-aside { top: auto; bottom: 12px; left: 50%; width: max-content; max-width: calc(100% - 24px); max-height: none; overflow: visible; transform: translateX(-50%); border-radius: 9999px; }
-  .lex-nav { display: flex; align-items: center; gap: 2px; padding: 4px; overflow-x: auto; border-radius: 9999px; scrollbar-width: none; }
-  .lex-nav::-webkit-scrollbar { display: none; }
-  .lex-groupe, .lex-groupe + .lex-groupe { display: flex; flex: none; margin: 0; padding: 0; border: 0; }
-  .lex-nav ol { flex-direction: row; flex: none; }
-  .lex-nav .sous, .lex-cat { display: none; }
-  .lex-nav a.seul-mobile { display: block; }
-  .lex-nav a { padding: 8px 12px; border-radius: 9999px; color: var(--ink); white-space: nowrap; font-size: 14px; text-decoration: none; }
-  .site-footer .wrap { padding-bottom: 24px; }
+  .lex-aside { display: none; }
 }
 </style>
 <link rel="stylesheet" href="assets/consentement.css">
